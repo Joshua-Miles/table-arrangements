@@ -1,0 +1,9 @@
+{
+  "extends": "@triframe/transpiler/default-config/triframe.tsconfig.json",
+  "include": [
+      "./src/**/*"
+  ],
+  "compilerOptions": {
+    "esModuleInterop": true
+  }
+}

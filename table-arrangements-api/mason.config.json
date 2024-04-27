@@ -1,0 +1,38 @@
+{
+    "production": {
+        "storage": {
+            "type": "file_store",
+            "bucketName": "table_arrangements_api"
+       },
+        "db": {
+            "type": "postgres.shared",
+            "name": "table_arrangements_api"
+        },
+        "app": {
+            "type": "app.shared",
+            "name": "table-arrangements-api",
+            "codebase": ".",
+            "ports": [
+                "table-arrangements-api-web"
+            ],
+            "env": {
+                "SESSION_SECRET": "christfirstcoderchristfirstcoder",
+                "DATABASE_URL": "{{db.url}}",
+                "API_PORT": "{{this.ports.table-arrangements-api-web}}",
+                "SUPER_USER_SECRET": "{{process.env.SUPER_USER_SECRET}}",
+                "BUCKET_NAME": "{{storage.bucketName}}"
+            }
+        },
+        "dns": {
+            "type": "load-balancer.shared",
+            "name": "table-arrangements-api",
+            "rules": {
+                "table-arrangements-api": {
+                    "url": "http://tablearrangements-api.smallapps.dev",
+                    "instance": "{{app.instance}}",
+                    "port": "{{app.ports.table-arrangements-api-web}}"
+                }
+            }
+        }
+    }
+}

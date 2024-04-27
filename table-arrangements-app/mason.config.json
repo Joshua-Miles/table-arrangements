@@ -1,0 +1,28 @@
+{
+    "production": {
+        "app": {
+            "type": "app.shared",
+            "name": "table-arrangements-app",
+            "codebase": ".",
+            "ports": [
+                "table-arrangements-app-web"
+            ],
+            "env": {
+                "PORT": "{{this.ports.table-arrangements-app-web}}",
+                "API_URL": "https://tablearrangements-api.smallapps.dev",
+                "NODE_ENV": "production"
+            }
+        },
+        "dns": {
+            "type": "load-balancer.shared",
+            "name": "table-arrangements-app",
+            "rules": {
+                "table-arrangements-app": {
+                    "url": "http://tablearrangements.smallapps.dev",
+                    "instance": "{{app.instance}}",
+                    "port": "{{app.ports.table-arrangements-app-web}}"
+                }
+            }
+        }
+    }
+}

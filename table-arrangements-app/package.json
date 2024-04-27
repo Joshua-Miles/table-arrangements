@@ -1,0 +1,36 @@
+{
+  "name": "parkin-plushies-app",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "triframe web.dev src/index.tsx",
+    "build": "triframe web.build src/index.tsx && librarian export",
+    "start": "node serve.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@triframe/transpiler": "^0.0.1",
+    "react": "~18.2.0",
+    "react-dom": "~18.2.0",
+    "@types/react-dom": "~18.0.6",
+    "@types/react": "~18.0.20",
+    "@triframe/ambassador": "^0.0.1",
+    "@triframe/utils-react": "^0.0.1",
+    "@triframe/mason": "^1.0.0",
+    "@triframe/icons": "^0.0.1",
+    "react-router-dom": "^6.18.0",
+    "color": "^4.2.3",
+    "@types/color": "^3.0.6",
+    "@chakra-ui/react": "^2.8.2",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "framer-motion": "^11.1.7"
+  },
+  "dependencies": {
+    "serve-static": "^1.15.0",
+    "finalhandler": "^1.2.0"
+  }
+}

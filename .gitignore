@@ -1,0 +1,6 @@
+node_modules
+.mason
+dist
+.env
+.DS_STORE
+.files
