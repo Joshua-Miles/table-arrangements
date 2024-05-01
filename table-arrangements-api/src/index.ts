@@ -2,19 +2,20 @@ import { serve } from '@triframe/proprietor';
 import { Session } from './Session';
 import { Globals as ScribeGlobals } from '@triframe/scribe';
 import { createGCPFileStore } from '@triframe/gcp-file-store';
+import { PublicUserInterface } from './User';
+import { PublicEventInterface } from './Event';
 
 if (process.env.BUCKET_NAME) {
     ScribeGlobals.fileStore = createGCPFileStore(process.env.BUCKET_NAME);
 }
 
 const PublicInterface = {
-    ping(){
-        return 'pong'
-    }
+    ...PublicUserInterface,
+    ...PublicEventInterface
 }
 
 serve(PublicInterface, {
-    initialSession: (): Session => ({ loggedInUserId: null, isSuperUser: false})
+    initialSession: (): Session => ({ loggedInUserId: null })
 })
 
 console.log('Started API on Port', process.env.API_PORT)
