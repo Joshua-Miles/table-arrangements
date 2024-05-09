@@ -4,7 +4,7 @@ import type { Observable } from "@triframe/ambassador";
 
 import type { PageArray } from "@triframe/ambassador";
 
-export function listWorkspaceEvents<S>(this: AmbassadorClient | void, workspaceId: number, options: {
+export function listEventObjectTemplates<S>(this: AmbassadorClient | void, eventId: number, options: {
     select: {
         ᑕ_model: {};
         ᑕ_superset?: undefined | {
@@ -12,26 +12,30 @@ export function listWorkspaceEvents<S>(this: AmbassadorClient | void, workspaceI
                 __serial__?: undefined | true;
             };
             workspaceId: number;
-            name: string;
-            roomWidth: null | number;
-            roomLength: null | number;
-            defaultTableObjectTemplateId: null | number;
+            label: string;
+            shape: "round" | "rectangle";
+            color: string;
+            width: number;
+            length: number;
         };
         ᑕ_subset: S;
     };
     limit?: undefined | number;
     offset?: undefined | number;
     sort?: undefined | {
-        field: "id" | "name" | "workspaceId" | "roomWidth" | "roomLength" | "defaultTableObjectTemplateId";
+        field: "length" | "id" | "width" | "color" | "label" | "workspaceId" | "shape";
         direction?: undefined | "ASC" | "DESC";
     } | {
-        field: "id" | "name" | "workspaceId" | "roomWidth" | "roomLength" | "defaultTableObjectTemplateId";
+        field: "length" | "id" | "width" | "color" | "label" | "workspaceId" | "shape";
         direction?: undefined | "ASC" | "DESC";
     }[];
 }): Observable<{
     isFailure: true;
     code: "userUnauthorized";
+} | {
+    isFailure: true;
+    code: "eventNotFound";
 } | PageArray<S>> {
     let api = AmbassadorClient.get(this, process.env.API_URL as string);
-    return api.callRemoteObservableFunction("listWorkspaceEvents", workspaceId, options);
+    return api.callRemoteObservableFunction("listEventObjectTemplates", eventId, options);
 }

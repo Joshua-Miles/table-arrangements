@@ -8,16 +8,23 @@ type IEventDetailsType = {
     name: string;
     roomWidth: null | number;
     roomLength: null | number;
-    defaultTableFixtureTemplateId: null | number;
+    defaultTableObjectTemplateId: null | number;
     tables: {
         id: number & {
             __serial__?: undefined | true;
         };
         eventId: number;
-        label: string;
+        number: number;
+        label: null | string;
         orderby: number;
         capacity: number;
-        fixtureId: null | number;
+        shape: null | "round" | "rectangle";
+        color: null | string;
+        length: null | number;
+        width: null | number;
+        x: null | number;
+        y: null | number;
+        zIndex: null | number;
     }[];
     tags: {
         id: number & {
@@ -27,7 +34,7 @@ type IEventDetailsType = {
         label: string;
         color: string;
     }[];
-    fixtureTemplates: {
+    fixtures: {
         id: number & {
             __serial__?: undefined | true;
         };
@@ -35,17 +42,11 @@ type IEventDetailsType = {
         label: string;
         shape: "round" | "rectangle";
         color: string;
-        width: number;
         length: number;
-    }[];
-    fixtures: {
-        id: number & {
-            __serial__?: undefined | true;
-        };
-        eventId: number;
-        templateId: number;
+        width: number;
         x: number;
         y: number;
+        zIndex: null | number;
     }[];
     parties: {
         id: number & {
@@ -130,7 +131,7 @@ export const EventDetailsType = {
                     __isReflected: true as const
                 }] as const
         } as const,
-        defaultTableFixtureTemplateId: {
+        defaultTableObjectTemplateId: {
             kind: "union" as const,
             __isReflected: true as const,
             types: [{
@@ -181,9 +182,20 @@ export const EventDetailsType = {
                         kind: "number" as const,
                         __isReflected: true as const
                     } as const,
-                    label: {
-                        kind: "string" as const,
+                    number: {
+                        kind: "number" as const,
                         __isReflected: true as const
+                    } as const,
+                    label: {
+                        kind: "union" as const,
+                        __isReflected: true as const,
+                        types: [{
+                                kind: "null" as const,
+                                __isReflected: true as const
+                            }, {
+                                kind: "string" as const,
+                                __isReflected: true as const
+                            }] as const
                     } as const,
                     orderby: {
                         kind: "number" as const,
@@ -193,7 +205,78 @@ export const EventDetailsType = {
                         kind: "number" as const,
                         __isReflected: true as const
                     } as const,
-                    fixtureId: {
+                    shape: {
+                        kind: "union" as const,
+                        __isReflected: true as const,
+                        types: [{
+                                kind: "null" as const,
+                                __isReflected: true as const
+                            }, {
+                                kind: "stringLiteral" as const,
+                                __isReflected: true as const,
+                                value: "round" as const
+                            }, {
+                                kind: "stringLiteral" as const,
+                                __isReflected: true as const,
+                                value: "rectangle" as const
+                            }] as const
+                    } as const,
+                    color: {
+                        kind: "union" as const,
+                        __isReflected: true as const,
+                        types: [{
+                                kind: "null" as const,
+                                __isReflected: true as const
+                            }, {
+                                kind: "string" as const,
+                                __isReflected: true as const
+                            }] as const
+                    } as const,
+                    length: {
+                        kind: "union" as const,
+                        __isReflected: true as const,
+                        types: [{
+                                kind: "null" as const,
+                                __isReflected: true as const
+                            }, {
+                                kind: "number" as const,
+                                __isReflected: true as const
+                            }] as const
+                    } as const,
+                    width: {
+                        kind: "union" as const,
+                        __isReflected: true as const,
+                        types: [{
+                                kind: "null" as const,
+                                __isReflected: true as const
+                            }, {
+                                kind: "number" as const,
+                                __isReflected: true as const
+                            }] as const
+                    } as const,
+                    x: {
+                        kind: "union" as const,
+                        __isReflected: true as const,
+                        types: [{
+                                kind: "null" as const,
+                                __isReflected: true as const
+                            }, {
+                                kind: "number" as const,
+                                __isReflected: true as const
+                            }] as const
+                    } as const,
+                    y: {
+                        kind: "union" as const,
+                        __isReflected: true as const,
+                        types: [{
+                                kind: "null" as const,
+                                __isReflected: true as const
+                            }, {
+                                kind: "number" as const,
+                                __isReflected: true as const
+                            }] as const
+                    } as const,
+                    zIndex: {
                         kind: "union" as const,
                         __isReflected: true as const,
                         types: [{
@@ -258,12 +341,12 @@ export const EventDetailsType = {
                 } as const
             } as const
         } as const,
-        fixtureTemplates: {
+        fixtures: {
             kind: "array" as const,
             of: {
                 kind: "object" as const,
                 __isReflected: true as const,
-                name: "FixtureTemplate" as const,
+                name: "Fixture" as const,
                 properties: {
                     id: {
                         kind: "intersection" as const,
@@ -319,58 +402,11 @@ export const EventDetailsType = {
                         kind: "string" as const,
                         __isReflected: true as const
                     } as const,
-                    width: {
-                        kind: "number" as const,
-                        __isReflected: true as const
-                    } as const,
                     length: {
                         kind: "number" as const,
                         __isReflected: true as const
-                    } as const
-                } as const
-            } as const
-        } as const,
-        fixtures: {
-            kind: "array" as const,
-            of: {
-                kind: "object" as const,
-                __isReflected: true as const,
-                name: "Fixture" as const,
-                properties: {
-                    id: {
-                        kind: "intersection" as const,
-                        __isReflected: true as const,
-                        alias: {
-                            typeName: "Serial" as const,
-                            typeArgs: [] as const
-                        } as const,
-                        types: [{
-                                kind: "number" as const,
-                                __isReflected: true as const
-                            }, {
-                                kind: "object" as const,
-                                __isReflected: true as const,
-                                name: "1" as const,
-                                properties: {
-                                    __serial__: {
-                                        kind: "union" as const,
-                                        __isReflected: true as const,
-                                        types: [{
-                                                kind: "undefined" as const,
-                                                __isReflected: true as const
-                                            }, {
-                                                kind: "trueLiteral" as const,
-                                                __isReflected: true as const
-                                            }] as const
-                                    } as const
-                                } as const
-                            }] as const
                     } as const,
-                    eventId: {
-                        kind: "number" as const,
-                        __isReflected: true as const
-                    } as const,
-                    templateId: {
+                    width: {
                         kind: "number" as const,
                         __isReflected: true as const
                     } as const,
@@ -381,6 +417,17 @@ export const EventDetailsType = {
                     y: {
                         kind: "number" as const,
                         __isReflected: true as const
+                    } as const,
+                    zIndex: {
+                        kind: "union" as const,
+                        __isReflected: true as const,
+                        types: [{
+                                kind: "null" as const,
+                                __isReflected: true as const
+                            }, {
+                                kind: "number" as const,
+                                __isReflected: true as const
+                            }] as const
                     } as const
                 } as const
             } as const

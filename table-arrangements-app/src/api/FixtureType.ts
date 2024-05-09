@@ -5,9 +5,14 @@ type IFixtureType = {
         __serial__?: undefined | true;
     };
     eventId: number;
-    templateId: number;
+    label: string;
+    shape: "round" | "rectangle";
+    color: string;
+    length: number;
+    width: number;
     x: number;
     y: number;
+    zIndex: null | number;
 };
 
 export const FixtureType = {
@@ -48,7 +53,32 @@ export const FixtureType = {
             kind: "number" as const,
             __isReflected: true as const
         } as const,
-        templateId: {
+        label: {
+            kind: "string" as const,
+            __isReflected: true as const
+        } as const,
+        shape: {
+            kind: "union" as const,
+            __isReflected: true as const,
+            types: [{
+                    kind: "stringLiteral" as const,
+                    __isReflected: true as const,
+                    value: "round" as const
+                }, {
+                    kind: "stringLiteral" as const,
+                    __isReflected: true as const,
+                    value: "rectangle" as const
+                }] as const
+        } as const,
+        color: {
+            kind: "string" as const,
+            __isReflected: true as const
+        } as const,
+        length: {
+            kind: "number" as const,
+            __isReflected: true as const
+        } as const,
+        width: {
             kind: "number" as const,
             __isReflected: true as const
         } as const,
@@ -59,6 +89,17 @@ export const FixtureType = {
         y: {
             kind: "number" as const,
             __isReflected: true as const
+        } as const,
+        zIndex: {
+            kind: "union" as const,
+            __isReflected: true as const,
+            types: [{
+                    kind: "null" as const,
+                    __isReflected: true as const
+                }, {
+                    kind: "number" as const,
+                    __isReflected: true as const
+                }] as const
         } as const
     } as const
 } as unknown as Reflected<IFixtureType>;

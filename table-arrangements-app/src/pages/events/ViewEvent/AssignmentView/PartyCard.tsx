@@ -29,7 +29,7 @@ export const PartyCard = forwardRef(({ party, showIndex, onPartySelected, indexO
     <Box width="100%" {...partyStyles} {...props} ref={ref}>
       <Flex justifyContent={party.attendees.length > 1 ? "space-between" : 'flex-end'}>
         {party.attendees.length > 1 &&
-          <Text color={Color(party.color).darken(.5).hex()} fontSize="xs" p={1}>{inferPartyName(party)}</Text>
+          <Text color={Color(party.color).darken(.5).hex()} fontSize="xs" p={1}>{inferPartyName(party)} Party</Text>
         }
         <Button variant="ghost" leftIcon={<EditIcon />} onMouseDown={() => onPartySelected(party)} size="xs" colorScheme="blue">
           Edit

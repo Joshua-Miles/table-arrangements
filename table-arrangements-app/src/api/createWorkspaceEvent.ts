@@ -18,7 +18,7 @@ export function createWorkspaceEvent(this: AmbassadorClient | void, workspaceId:
     name: string;
     roomWidth: null | number;
     roomLength: null | number;
-    defaultTableFixtureTemplateId: null | number;
+    defaultTableObjectTemplateId: null | number;
 }> {
     let api = AmbassadorClient.get(this, process.env.API_URL as string);
     return api.callRemoteFunction("createWorkspaceEvent", workspaceId, options);

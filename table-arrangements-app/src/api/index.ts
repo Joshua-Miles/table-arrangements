@@ -16,9 +16,9 @@ export * from "./AttendeeType";
 
 export * from "./TableType";
 
-export * from "./FixtureTemplateType";
-
 export * from "./FixtureType";
+
+export * from "./ObjectTemplateType";
 
 export * from "./createWorkspaceEvent";
 
@@ -30,6 +30,4 @@ export * from "./updateEventDetails";
 
 export * from "./createEventTag";
 
-export * from "./createEventFixtureTemplate";
-
-export * from "./createEventFixture";
+export * from "./listEventObjectTemplates";

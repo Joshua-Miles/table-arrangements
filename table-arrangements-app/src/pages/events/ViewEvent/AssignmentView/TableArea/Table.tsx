@@ -1,8 +1,10 @@
-import { Alert, AlertDescription, AlertIcon, AlertTitle, Card, CardBody, Flex, Text, VStack } from "@chakra-ui/react";
-import { Fragment } from "react";
+import { Alert, AlertDescription, AlertIcon, AlertTitle, Avatar, Button, Card, CardBody, Flex, Input, InputGroup, InputRightAddon, Text, VStack } from "@chakra-ui/react";
+import { Fragment, useState, FocusEvent} from "react";
 import { DraggablePartyCard } from "../DraggablePartCard";
 import { Party, Table } from "../../fields";
 import { DropTarget } from "./DropTarget";
+import { inferTableName } from "../../inferTableLabel";
+import { useEventEditor } from "../../EventEditor";
 
 type TableProps = {
     table: Table,
@@ -11,6 +13,9 @@ type TableProps = {
 }
 
 export function Table({ table, parties, onPartySelected }: TableProps) {
+    const editor = useEventEditor();
+
+    const [ isEditingTableLabel, setIsEditingTableLabel ] = useState(false)
 
     const sortedParties = [ ...parties ]
 
@@ -20,11 +25,34 @@ export function Table({ table, parties, onPartySelected }: TableProps) {
 
     let attendeeCounter = 0;
 
+    function handleTableLabelInputBlur(e: FocusEvent<HTMLInputElement>) {
+        if (!table.id) return;
+        editor.updateTable(table.id, { label: e.target.value })
+        setIsEditingTableLabel(false)
+    }
+
     return (
         <Card key={table.id} borderColor={totalAttendees > table.capacity ? 'red' : undefined} borderStyle="solid" borderWidth={1}>
+            <Avatar size="sm" backgroundColor="green.500" name={`${table.number}`} position="absolute" left={-3} top={-3} />
             <CardBody>
                 <Flex justifyContent="space-between">
-                    {table.label}
+                    {!isEditingTableLabel
+                        ?<Button variant="ghost" colorScheme="blue" size="sm" onClick={() => setIsEditingTableLabel(true)}>
+                            {inferTableName(table, editor.getParties())} Table
+                        </Button>
+                        : <InputGroup size="sm" width={200}>
+                            <Input
+                                type="text"
+                                autoFocus
+                                placeholder={inferTableName(table, editor.getParties())}
+                                defaultValue={table.label ?? ''}
+                                onBlur={handleTableLabelInputBlur}
+                            />
+                            <InputRightAddon>
+                                Table
+                            </InputRightAddon>
+                        </InputGroup>
+                    }
                     <Text color="gray.500">{totalAttendees} / {table.capacity}</Text>
                 </Flex>
                 {totalAttendees > table.capacity && (

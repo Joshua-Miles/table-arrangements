@@ -1,25 +1,29 @@
 import { BoxProps, Card, VStack } from "@chakra-ui/react";
 import { useEventEditor } from "../EventEditor";
-import { DraggableFixtureDisplay } from "./DraggableFixtureDisplay";
-
-
+import { DraggableTableDisplay } from "./TableDisplay";
 
 export function UnplacedTables(props: BoxProps) {
     const editor = useEventEditor();
 
-    const defaultTableFixtureTemplateId = editor.getDefaultTableFixtureTemplateId();
+    const { shape, color, width, length } = editor.getScaledDefaultTableObjectTemplate();
 
-    if (defaultTableFixtureTemplateId === null) throw Error(`Tried to render UnplacedTables before defining a "defaultTableFixtureTemplateId"`)
+    const unplacedTables = editor.getUnplacedTables();
 
-    const tables = editor.getTables();
-
-    const unplacedTables = tables.filter( table => table.fixtureId === null);
+    if (unplacedTables.length === 0) return null;
 
     return (
         <Card p={2} {...props} maxHeight="100%" overflow="scroll">
             <VStack align="center" spacing={10}>
                 {unplacedTables.map( table => (
-                    <DraggableFixtureDisplay fixtureTemplateId={defaultTableFixtureTemplateId} label={table.label} tableId={table.id} />
+                    <DraggableTableDisplay
+                        table={{
+                            ...table,
+                            shape,
+                            color,
+                            width,
+                            length
+                        }}
+                    />
                 ))}
             </VStack>
         </Card>

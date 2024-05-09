@@ -1,4 +1,5 @@
 import { persist, Serial, AppendFields } from "@triframe/scribe";
+import { createDefaultObjectTemplates } from "./ObjectTemplate";
 
 export type Workspace = {
     id: Serial
@@ -11,4 +12,8 @@ export const Workspaces = persist<Workspace>()
     .primaryKey('id')
     .defaults({ isPersonalWorkspace: false });
 
-export const createWorkspace = (fields: AppendFields<typeof Workspaces>) => Workspaces.append(fields);
+export const createWorkspace = async (fields: AppendFields<typeof Workspaces>) => {
+    const workspace = await Workspaces.append(fields)
+    await createDefaultObjectTemplates(workspace.id);
+    return workspace;
+};

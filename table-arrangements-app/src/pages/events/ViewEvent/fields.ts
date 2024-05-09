@@ -1,5 +1,5 @@
 import { from, OptionalSerials } from '@triframe/ambassador'
-import { EventDetailsType } from "../../../api";
+import { EventDetailsType, ObjectTemplateType } from "../../../api";
 
 export const eventDetailFields = (
     from(EventDetailsType)
@@ -7,14 +7,20 @@ export const eventDetailFields = (
         .name()
         .roomWidth()
         .roomLength()
-        .defaultTableFixtureTemplateId()
+        .defaultTableObjectTemplateId()
         .tables( (table) => (
             table
                 .id()
+                .number()
                 .label()
                 .orderby()
                 .capacity()
-                .fixtureId()
+                .color()
+                .shape()
+                .width()
+                .length()
+                .x()
+                .y()
         ))
         .tags( tag => (
             tag
@@ -22,19 +28,14 @@ export const eventDetailFields = (
                 .color()
                 .label()
         ))
-        .fixtureTemplates( fixtureTemplate => (
-            fixtureTemplate
+        .fixtures( fixture => (
+            fixture
                 .id()
                 .label()
                 .color()
                 .shape()
-                .length()
                 .width()
-        ))
-        .fixtures( fixture => (
-            fixture
-                .id()
-                .templateId()
+                .length()
                 .x()
                 .y()
         ))
@@ -64,5 +65,28 @@ export type Table = EventDetails['tables'][number]
 
 export type EventTag = EventDetails['tags'][number]
 
-export type FixtureTemplate = EventDetails['fixtureTemplates'][number]
+export type Fixture = EventDetails['fixtures'][number]
 
+export type PlacedTable = Table & {
+    color: string
+    shape: 'round' | 'rectangle'
+    width: number
+    length: number
+    zIndex: number
+    x: number
+    y: number
+}
+
+export function isPlacedTable(table: Table): table is PlacedTable {
+    return table.shape !== null && table.x !== null && table.y !== null
+}
+
+export const objectTemplateFields = from(ObjectTemplateType)
+    .id()
+    .color()
+    .label()
+    .shape()
+    .length()
+    .width()
+
+export type ObjectTemplate = (typeof objectTemplateFields)['ᑕ_subset']

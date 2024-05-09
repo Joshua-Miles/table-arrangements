@@ -2,7 +2,6 @@ import { AssociationRemovalStrategies } from "@triframe/scribe";
 import { Attendees } from "./Attendee";
 import { Events } from "./Event";
 import { Fixtures } from "./Fixture";
-import { FixtureTemplates } from "./FixtureTemplate";
 import { Parties } from "./Party";
 import { Tables } from "./Table";
 import { Tags } from "./Tags";
@@ -13,9 +12,6 @@ export const EventDetails = Events.map( event => ({
         .omit('eventId')
         .strategyForAssociationRemoval(AssociationRemovalStrategies.Delete),
     tags: Tags.withEventId(event.id)
-        .omit('eventId')
-        .strategyForAssociationRemoval(AssociationRemovalStrategies.Delete),
-    fixtureTemplates: FixtureTemplates.withEventId(event.id)
         .omit('eventId')
         .strategyForAssociationRemoval(AssociationRemovalStrategies.Delete),
     fixtures: Fixtures.withEventId(event.id)

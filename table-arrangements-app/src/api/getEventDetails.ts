@@ -7,13 +7,20 @@ export function getEventDetails<S>(this: AmbassadorClient | void, eventId: numbe
         ᑕ_model: {};
         ᑕ_superset?: undefined | {
             tables: {
+                number: number;
+                length: null | number;
                 id: number & {
                     __serial__?: undefined | true;
                 };
-                label: string;
+                width: null | number;
+                color: null | string;
+                zIndex: null | number;
+                label: null | string;
+                x: null | number;
+                y: null | number;
+                shape: null | "round" | "rectangle";
                 orderby: number;
                 capacity: number;
-                fixtureId: null | number;
             }[];
             tags: {
                 id: number & {
@@ -22,23 +29,18 @@ export function getEventDetails<S>(this: AmbassadorClient | void, eventId: numbe
                 color: string;
                 label: string;
             }[];
-            fixtureTemplates: {
+            fixtures: {
                 length: number;
                 id: number & {
                     __serial__?: undefined | true;
                 };
                 width: number;
                 color: string;
+                zIndex: null | number;
                 label: string;
-                shape: "round" | "rectangle";
-            }[];
-            fixtures: {
-                id: number & {
-                    __serial__?: undefined | true;
-                };
                 x: number;
                 y: number;
-                templateId: number;
+                shape: "round" | "rectangle";
             }[];
             parties: {
                 attendees: {
@@ -63,7 +65,7 @@ export function getEventDetails<S>(this: AmbassadorClient | void, eventId: numbe
             name: string;
             roomWidth: null | number;
             roomLength: null | number;
-            defaultTableFixtureTemplateId: null | number;
+            defaultTableObjectTemplateId: null | number;
         };
         ᑕ_subset: S;
     };

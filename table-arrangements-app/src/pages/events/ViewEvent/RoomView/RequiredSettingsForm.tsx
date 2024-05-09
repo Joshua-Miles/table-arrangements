@@ -6,28 +6,26 @@ import { EventDetails } from "../fields";
 import { formatFixtureLabel } from "./formatFixtureLabel";
 import { MeasurementInput } from "./MeasurementInput";
 
-type FormValues = Pick<EventDetails, 'roomLength' | 'roomWidth' | 'defaultTableFixtureTemplateId'>
+type FormValues = Pick<EventDetails, 'roomLength' | 'roomWidth' | 'defaultTableObjectTemplateId'>
 
 export function RequiredSettingsForm() {
     const editor = useEventEditor();
 
-    const fixtureTemplates = editor.getFixtureTemplates();
+    const objectTemplates = editor.getObjectTemplates();
 
     const [ values, setValues ] = useState<FormValues>({
-        defaultTableFixtureTemplateId: null,
+        defaultTableObjectTemplateId: null,
         roomLength: editor.getRoomLength(),
         roomWidth: editor.getRoomWidth()
     })
 
     function handleSubmit() {
         editor.updateEvent({
-            defaultTableFixtureTemplateId: values.defaultTableFixtureTemplateId,
+            defaultTableObjectTemplateId: values.defaultTableObjectTemplateId,
             roomLength: values.roomLength,
             roomWidth: values.roomWidth
         })
     }
-
-    console.log(fixtureTemplates)
 
     return (
         <Center height="100%">
@@ -39,14 +37,6 @@ export function RequiredSettingsForm() {
                     <VStack spacing={4}>
                         <HStack>
                             <FormControl>
-                                <FormLabel>Room Width</FormLabel>
-                                <MeasurementInput
-                                    placeholder="100.50"
-                                    value={values.roomWidth}
-                                    onChange={roomWidth => setValues({ ...values, roomWidth })}
-                                />
-                            </FormControl>
-                            <FormControl>
                                 <FormLabel>Room Length</FormLabel>
                                 <MeasurementInput
                                     placeholder="30.25"
@@ -54,14 +44,22 @@ export function RequiredSettingsForm() {
                                     onChange={roomLength => setValues({ ...values, roomLength })}
                                 />
                             </FormControl>
+                            <FormControl>
+                                <FormLabel>Room Width</FormLabel>
+                                <MeasurementInput
+                                    placeholder="100.50"
+                                    value={values.roomWidth}
+                                    onChange={roomWidth => setValues({ ...values, roomWidth })}
+                                />
+                            </FormControl>
                         </HStack>
                         <FormControl>
                             <FormLabel>Default Table Size</FormLabel>
-                            <Select value={values.defaultTableFixtureTemplateId ?? undefined} onChange={e => setValues({
+                            <Select placeholder="Select default table size" value={values.defaultTableObjectTemplateId ?? undefined} onChange={e => setValues({
                                 ...values,
-                                defaultTableFixtureTemplateId: Number(e.target.value)
+                                defaultTableObjectTemplateId: Number(e.target.value)
                             })}>
-                                {fixtureTemplates.map( fixtureTemplate => (
+                                {objectTemplates.map( fixtureTemplate => (
                                     <option value={fixtureTemplate.id}>
                                         {formatFixtureLabel(fixtureTemplate, editor.defaultMeasurementSystem)}
                                     </option>

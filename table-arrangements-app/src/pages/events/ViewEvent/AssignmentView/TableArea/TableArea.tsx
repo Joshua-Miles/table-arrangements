@@ -11,7 +11,7 @@ type TableAreaProps = BoxProps & {
 export function TableArea({ eventId, event, onPartySelected, ...boxProps }: TableAreaProps) {
     return (
         <Box {...boxProps} padding={5} height="100%" overflowY="scroll">
-            <SimpleGrid columns={3} spacing={2}>
+            <SimpleGrid columns={3} spacing={6}>
                 {event.tables.map( table => (
                     <Table
                         table={table}

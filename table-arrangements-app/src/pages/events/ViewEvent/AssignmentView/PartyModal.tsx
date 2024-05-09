@@ -15,6 +15,8 @@ import {
     FormControl,
     FormLabel,
     HStack,
+    InputGroup,
+    InputRightAddon,
   } from '@chakra-ui/react'
 import { useState, KeyboardEvent, useRef, useEffect } from "react";
 import { AddIcon, DeleteIcon } from "@chakra-ui/icons";
@@ -90,12 +92,17 @@ function PartyForm({ party, onSave, onDelete, onCancel }: PartyModalProps & { pa
                         <FormLabel>Party</FormLabel>
                         <HStack spacing={1}>
                             <Input type="color" width={20} value={values.color} onChange={e => setValues({ ...values, color: e.target.value })} />
-                            <Input flex={1}
-                                type="text"
-                                value={values.name}
-                                onChange={e => setValues({ ...values, name: e.target.value })}
-                                placeholder={inferPartyName(values)}
-                            />
+                            <InputGroup>
+                                <Input flex={1}
+                                    type="text"
+                                    value={values.name}
+                                    onChange={e => setValues({ ...values, name: e.target.value })}
+                                    placeholder={inferPartyName(values)}
+                                />
+                                <InputRightAddon>
+                                    Party
+                                </InputRightAddon>
+                            </InputGroup>
                         </HStack>
                     </FormControl>
                     <FormControl flex={1}>

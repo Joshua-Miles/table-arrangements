@@ -8,7 +8,7 @@ type IEventType = {
     name: string;
     roomWidth: null | number;
     roomLength: null | number;
-    defaultTableFixtureTemplateId: null | number;
+    defaultTableObjectTemplateId: null | number;
 };
 
 export const EventType = {
@@ -75,7 +75,7 @@ export const EventType = {
                     __isReflected: true as const
                 }] as const
         } as const,
-        defaultTableFixtureTemplateId: {
+        defaultTableObjectTemplateId: {
             kind: "union" as const,
             __isReflected: true as const,
             types: [{

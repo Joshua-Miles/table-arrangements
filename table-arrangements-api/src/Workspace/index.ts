@@ -9,4 +9,8 @@ export { WorkspaceUserRoles, WorkspaceUserRole } from './WorkspaceUser';
 
 export { assertUserHasRoleOnWorkspace, } from './assertUserHasRoleOnWorkspace'
 
-export const PublicWorkspaceInterface = { }
+export { ObjectTemplates } from './ObjectTemplate';
+
+export const PublicWorkspaceInterface = {
+
+}

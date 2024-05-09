@@ -2,45 +2,42 @@ import { Box, Flex } from "@chakra-ui/react";
 import { DndContext, DragEndEvent, DragOverlay, DragStartEvent } from "@dnd-kit/core";
 import { useState } from "react";
 import { useEventEditor } from "../EventEditor"
-import { DraggableFixtureDisplay } from "./DraggableFixtureDisplay";
-import { FixtureDisplay, FixtureDisplayProps } from "./FixtureDisplay";
 import { RequiredSettingsForm } from "./RequiredSettingsForm";
 import { RoomDisplay } from "./RoomDisplay";
+import { DraggableTableDisplay, TableDisplay, TableWithObjectTemplate } from "./TableDisplay";
 import { UnplacedTables } from "./UnplacedTables";
 
 export function RoomView() {
     const editor = useEventEditor();
 
-    const [ draggedFixtureProps, setDraggedFixtureProps ] = useState<FixtureDisplayProps | null>(null);
+    const [ draggedTable, setDraggedTable ] = useState<TableWithObjectTemplate | null>(null);
 
     if (!editor.hasRequiredSettingsForRoomView) {
         return <RequiredSettingsForm />
     }
 
     function handleDragStart(e: DragStartEvent) {
-        const draggedFixtureProps = e.active.data.current as FixtureDisplayProps
-        setDraggedFixtureProps(draggedFixtureProps);
+        const draggedTable = e.active.data.current as TableWithObjectTemplate
+        setDraggedTable(draggedTable);
     }
 
     function handleDragEnd(e: DragEndEvent) {
         const fixtureRect = e.active.rect.current.translated
         const roomRect = e.over?.rect;
-        if (!fixtureRect || !roomRect || !draggedFixtureProps) return;
+        if (!fixtureRect || !roomRect || !draggedTable || !draggedTable.id) return;
 
         const x = editor.convertPixelsToBase(fixtureRect.left - roomRect.left);
         const y = editor.convertPixelsToBase(fixtureRect.top - roomRect.top);
 
-        if (draggedFixtureProps.fixtureId) return moveFixture();
-        else if (draggedFixtureProps.tableId) return editor.placeTable(draggedFixtureProps.tableId, x, y);
+        return editor.placeTable(draggedTable.id, x, y);
     }
 
     function moveFixture() {
 
     }
 
-    const fixtures = editor.getScaledFixturesWithLabels();
+    const room = editor.getScaledRoom();
 
-    console.log(fixtures)
 
     return (
         <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
@@ -48,21 +45,15 @@ export function RoomView() {
                 <UnplacedTables width="200px" />
                 <Box flex={1} p={4}>
                     <RoomDisplay>
-                        {fixtures.map( fixture => (
-                            <DraggableFixtureDisplay
-                                fixtureId={fixture.id}
-                                label={fixture.label}
-                                fixtureTemplateId={fixture.templateId}
-                                x={fixture.x}
-                                y={fixture.y}
-                            />
+                        {room.tables.map( table => (
+                            <DraggableTableDisplay table={table} />
                         ))}
                     </RoomDisplay>
                 </Box>
             </Flex>
             <DragOverlay>
-                {draggedFixtureProps !== null &&
-                    <FixtureDisplay {...draggedFixtureProps} />
+                {draggedTable !== null &&
+                    <TableDisplay table={draggedTable} />
                 }
             </DragOverlay>
         </DndContext>

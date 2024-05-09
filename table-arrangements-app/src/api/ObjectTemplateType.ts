@@ -1,10 +1,10 @@
 import type { Reflected } from "@triframe/ambassador";
 
-type IFixtureTemplateType = {
+type IObjectTemplateType = {
     id: number & {
         __serial__?: undefined | true;
     };
-    eventId: number;
+    workspaceId: number;
     label: string;
     shape: "round" | "rectangle";
     color: string;
@@ -12,10 +12,10 @@ type IFixtureTemplateType = {
     length: number;
 };
 
-export const FixtureTemplateType = {
+export const ObjectTemplateType = {
     kind: "object" as const,
     __isReflected: true as const,
-    name: "FixtureTemplate" as const,
+    name: "ObjectTemplate" as const,
     properties: {
         id: {
             kind: "intersection" as const,
@@ -46,7 +46,7 @@ export const FixtureTemplateType = {
                     } as const
                 }] as const
         } as const,
-        eventId: {
+        workspaceId: {
             kind: "number" as const,
             __isReflected: true as const
         } as const,
@@ -80,4 +80,4 @@ export const FixtureTemplateType = {
             __isReflected: true as const
         } as const
     } as const
-} as unknown as Reflected<IFixtureTemplateType>;
+} as unknown as Reflected<IObjectTemplateType>;

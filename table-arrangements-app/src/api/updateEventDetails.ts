@@ -2,30 +2,34 @@ import { AmbassadorClient } from "@triframe/ambassador";
 
 export function updateEventDetails(this: AmbassadorClient | void, eventId: number, fields: {
     tables?: undefined | (undefined | {
+        number?: undefined | number;
+        length?: undefined | null | number;
         id?: undefined | number;
-        label?: undefined | string;
+        width?: undefined | null | number;
+        color?: undefined | null | string;
+        zIndex?: undefined | null | number;
+        label?: undefined | null | string;
+        x?: undefined | null | number;
+        y?: undefined | null | number;
+        shape?: undefined | null | "round" | "rectangle";
         orderby?: undefined | number;
         capacity?: undefined | number;
-        fixtureId?: undefined | null | number;
     })[];
     tags?: undefined | (undefined | {
         id?: undefined | number;
         color?: undefined | string;
         label?: undefined | string;
     })[];
-    fixtureTemplates?: undefined | (undefined | {
+    fixtures?: undefined | (undefined | {
         length?: undefined | number;
         id?: undefined | number;
         width?: undefined | number;
         color?: undefined | string;
+        zIndex?: undefined | null | number;
         label?: undefined | string;
-        shape?: undefined | "round" | "rectangle";
-    })[];
-    fixtures?: undefined | (undefined | {
-        id?: undefined | number;
         x?: undefined | number;
         y?: undefined | number;
-        templateId?: undefined | number;
+        shape?: undefined | "round" | "rectangle";
     })[];
     parties?: undefined | (undefined | {
         attendees?: undefined | (undefined | {
@@ -44,7 +48,7 @@ export function updateEventDetails(this: AmbassadorClient | void, eventId: numbe
     name?: undefined | string;
     roomWidth?: undefined | null | number;
     roomLength?: undefined | null | number;
-    defaultTableFixtureTemplateId?: undefined | null | number;
+    defaultTableObjectTemplateId?: undefined | null | number;
 }): Promise<{
     isFailure: true;
     code: "userUnauthorized";
@@ -53,13 +57,20 @@ export function updateEventDetails(this: AmbassadorClient | void, eventId: numbe
     code: "eventNotFound";
 } | {
     tables: {
+        number: number;
+        length: null | number;
         id: number & {
             __serial__?: undefined | true;
         };
-        label: string;
+        width: null | number;
+        color: null | string;
+        zIndex: null | number;
+        label: null | string;
+        x: null | number;
+        y: null | number;
+        shape: null | "round" | "rectangle";
         orderby: number;
         capacity: number;
-        fixtureId: null | number;
     }[];
     tags: {
         id: number & {
@@ -68,23 +79,18 @@ export function updateEventDetails(this: AmbassadorClient | void, eventId: numbe
         color: string;
         label: string;
     }[];
-    fixtureTemplates: {
+    fixtures: {
         length: number;
         id: number & {
             __serial__?: undefined | true;
         };
         width: number;
         color: string;
+        zIndex: null | number;
         label: string;
-        shape: "round" | "rectangle";
-    }[];
-    fixtures: {
-        id: number & {
-            __serial__?: undefined | true;
-        };
         x: number;
         y: number;
-        templateId: number;
+        shape: "round" | "rectangle";
     }[];
     parties: {
         attendees: {
@@ -109,7 +115,7 @@ export function updateEventDetails(this: AmbassadorClient | void, eventId: numbe
     name: string;
     roomWidth: null | number;
     roomLength: null | number;
-    defaultTableFixtureTemplateId: null | number;
+    defaultTableObjectTemplateId: null | number;
 }> {
     let api = AmbassadorClient.get(this, process.env.API_URL as string);
     return api.callRemoteFunction("updateEventDetails", eventId, fields);
