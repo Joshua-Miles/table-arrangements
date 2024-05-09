@@ -6,8 +6,12 @@ export type Table = {
     label: string
     orderby: number
     capacity: number
+    fixtureId: number | null
 }
 
 export const Tables = persist<Table>()
     .primaryKey('id')
-    .indexBy('eventId');
+    .indexBy('eventId')
+    .defaults({
+        fixtureId: null
+    });

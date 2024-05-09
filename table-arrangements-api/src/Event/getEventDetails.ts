@@ -1,14 +1,14 @@
 import { Client } from "@triframe/proprietor";
-import { observer, ObserverContext, ListOptions} from "@triframe/scribe";
+import { observer, ObserverContext, GetOptions} from "@triframe/scribe";
 import { Session } from "../Session";
 import { WorkspaceUserRoles } from "../Workspace";
 import { assertUserHasRoleOnEvent } from "./assertUserHasRoleOnEvent";
-import { Tables } from "./Table";
+import { EventDetails } from "./EventDetails";
 
-export const listEventTables = observer(async <S>({ observe }: ObserverContext, client: Client<Session>, eventId: number, options: ListOptions<typeof Tables, S>) => {
+export const getEventDetails = observer(async <S>({ observe }: ObserverContext, client: Client<Session>, eventId: number, options: GetOptions<typeof EventDetails, S>) => {
     const { loggedInUserId } = await client.getSession();
     const failure = await assertUserHasRoleOnEvent(eventId, loggedInUserId, WorkspaceUserRoles.collaborator);
     if (failure) return failure;
 
-    return await observe(Tables.withEventId(eventId).list(options));
+    return await observe(EventDetails.withId(eventId).get(options));
 })

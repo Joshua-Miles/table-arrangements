@@ -4,10 +4,8 @@ type IAttendeeType = {
     id: number & {
         __serial__?: undefined | true;
     };
-    eventId: number;
-    partyId: null | number;
-    tableId: null | number;
-    seatNumber: null | number;
+    partyId: number;
+    tagId: null | number;
     name: string;
 };
 
@@ -45,33 +43,11 @@ export const AttendeeType = {
                     } as const
                 }] as const
         } as const,
-        eventId: {
+        partyId: {
             kind: "number" as const,
             __isReflected: true as const
         } as const,
-        partyId: {
-            kind: "union" as const,
-            __isReflected: true as const,
-            types: [{
-                    kind: "null" as const,
-                    __isReflected: true as const
-                }, {
-                    kind: "number" as const,
-                    __isReflected: true as const
-                }] as const
-        } as const,
-        tableId: {
-            kind: "union" as const,
-            __isReflected: true as const,
-            types: [{
-                    kind: "null" as const,
-                    __isReflected: true as const
-                }, {
-                    kind: "number" as const,
-                    __isReflected: true as const
-                }] as const
-        } as const,
-        seatNumber: {
+        tagId: {
             kind: "union" as const,
             __isReflected: true as const,
             types: [{

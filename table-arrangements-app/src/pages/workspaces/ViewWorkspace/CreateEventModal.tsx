@@ -83,6 +83,7 @@ export function CreateEventModal({ workspaceId, isOpen, onClose }: CreateEventMo
                                 <FormLabel>Table Capacity</FormLabel>
                                 <Input placeholder="Enter a number" size='lg'
                                     value={options.tableCapacity ?? ''}
+                                    type="number"
                                     onChange={e => setOption('tableCapacity', Number(e.target.value))}
                                 />
                             </FormControl>

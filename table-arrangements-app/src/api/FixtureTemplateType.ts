@@ -1,20 +1,21 @@
 import type { Reflected } from "@triframe/ambassador";
 
-type IEventType = {
+type IFixtureTemplateType = {
     id: number & {
         __serial__?: undefined | true;
     };
-    workspaceId: number;
-    name: string;
-    roomWidth: null | number;
-    roomLength: null | number;
-    defaultTableFixtureTemplateId: null | number;
+    eventId: number;
+    label: string;
+    shape: "round" | "rectangle";
+    color: string;
+    width: number;
+    length: number;
 };
 
-export const EventType = {
+export const FixtureTemplateType = {
     kind: "object" as const,
     __isReflected: true as const,
-    name: "Event" as const,
+    name: "FixtureTemplate" as const,
     properties: {
         id: {
             kind: "intersection" as const,
@@ -45,46 +46,38 @@ export const EventType = {
                     } as const
                 }] as const
         } as const,
-        workspaceId: {
+        eventId: {
             kind: "number" as const,
             __isReflected: true as const
         } as const,
-        name: {
+        label: {
             kind: "string" as const,
             __isReflected: true as const
         } as const,
-        roomWidth: {
+        shape: {
             kind: "union" as const,
             __isReflected: true as const,
             types: [{
-                    kind: "null" as const,
-                    __isReflected: true as const
+                    kind: "stringLiteral" as const,
+                    __isReflected: true as const,
+                    value: "round" as const
                 }, {
-                    kind: "number" as const,
-                    __isReflected: true as const
+                    kind: "stringLiteral" as const,
+                    __isReflected: true as const,
+                    value: "rectangle" as const
                 }] as const
         } as const,
-        roomLength: {
-            kind: "union" as const,
-            __isReflected: true as const,
-            types: [{
-                    kind: "null" as const,
-                    __isReflected: true as const
-                }, {
-                    kind: "number" as const,
-                    __isReflected: true as const
-                }] as const
+        color: {
+            kind: "string" as const,
+            __isReflected: true as const
         } as const,
-        defaultTableFixtureTemplateId: {
-            kind: "union" as const,
-            __isReflected: true as const,
-            types: [{
-                    kind: "null" as const,
-                    __isReflected: true as const
-                }, {
-                    kind: "number" as const,
-                    __isReflected: true as const
-                }] as const
+        width: {
+            kind: "number" as const,
+            __isReflected: true as const
+        } as const,
+        length: {
+            kind: "number" as const,
+            __isReflected: true as const
         } as const
     } as const
-} as unknown as Reflected<IEventType>;
+} as unknown as Reflected<IFixtureTemplateType>;

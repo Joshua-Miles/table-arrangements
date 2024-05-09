@@ -3,6 +3,7 @@ import { makeFailure } from "@triframe/scribe";
 import { Session } from "../Session";
 import { WorkspaceUserRoles, assertUserHasRoleOnWorkspace } from "../Workspace";
 import { Events } from "./Event";
+import { createDefaultFixtureTemplates } from "./FixtureTemplate";
 import { Tables } from "./Table";
 
 type CreateWorkspaceEventOptions = {
@@ -31,6 +32,8 @@ export async function createWorkspaceEvent(client: Client<Session>, workspaceId:
             capacity: tableCapacity
         })))
     }
+
+    await createDefaultFixtureTemplates(event.id)
 
     return event;
 }

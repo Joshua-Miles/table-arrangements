@@ -1,40 +1,36 @@
-import { Flex } from "@chakra-ui/react";
-import { DndContext, DragEndEvent, DragOverlay, DragStartEvent } from "@dnd-kit/core";
-import { useState } from "react";
+import { from, isAnyFailure, isFailure, OptionalSerials, Unreflect } from '@triframe/ambassador'
+import { Button, ButtonGroup, Flex } from "@chakra-ui/react";
+import { isLoading, useFormForResult } from "@triframe/utils-react";
 import { useParams } from "react-router-dom";
-import { updateEventAttendee } from "../../../api";
-import { Attendee, AttendeeCard } from "./AttendeeCard";
-import { AttendeeList } from "./AttendeeList";
-import { TableArea } from "./TableArea";
+import { getEventDetails, updateEventDetails } from "../../../api";
+import { eventDetailFields } from './fields';
+import { EventEditorProvider } from './EventEditor';
+import { AssignmentView } from './AssignmentView';
+import { Layout } from './Layout';
+
 
 export function ViewEvent () {
     const params = useParams();
 
     const eventId = Number(params.eventId);
 
-    const [ draggedAttendee, setDraggedAttendee ] = useState<Attendee | null>(null);
+    const form = useFormForResult(getEventDetails, eventId, { select: eventDetailFields })
 
-    function handleDragStart(e: DragStartEvent) {
-       const attendee = e.active.data.current?.attendee as Attendee
-       setDraggedAttendee(attendee);
-    }
+    const [ event, setEvent ] = form.useState();
 
-    async function handleDragEnd(e: DragEndEvent) {
-        if (!e.over || !draggedAttendee) return;
-        const tableId = e.over.data.current?.tableId as number;
-        const seatNumber = e.over.data.current?.seatNumber as number;
-        await updateEventAttendee(eventId, draggedAttendee.id, { tableId, seatNumber })
-    }
+    const { failure } = form.useSaveHandler(async (event) => {
+        if (isAnyFailure(event)) return;
+        return await updateEventDetails(eventId, event);
+    })
+
+    const isSaving = form.useAutosave(500)
+
+
+    if (isLoading(event) || isAnyFailure(event)) return null
 
     return (
-        <Flex height="100%">
-            <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
-                <AttendeeList eventId={eventId} width="25vw"/>
-                <TableArea eventId={eventId} flex={1} />
-                <DragOverlay>
-                    {draggedAttendee !== null && <AttendeeCard attendee={draggedAttendee} /> }
-                </DragOverlay>
-            </DndContext>
-        </Flex>
+        <EventEditorProvider eventDetails={event} setEventDetails={setEvent}>
+           <Layout />
+        </EventEditorProvider>
     )
 }

@@ -13,16 +13,19 @@ export function listWorkspaceEvents<S>(this: AmbassadorClient | void, workspaceI
             };
             workspaceId: number;
             name: string;
+            roomWidth: null | number;
+            roomLength: null | number;
+            defaultTableFixtureTemplateId: null | number;
         };
         ᑕ_subset: S;
     };
     limit?: undefined | number;
     offset?: undefined | number;
     sort?: undefined | {
-        field: "id" | "name" | "workspaceId";
+        field: "id" | "name" | "workspaceId" | "roomWidth" | "roomLength" | "defaultTableFixtureTemplateId";
         direction?: undefined | "ASC" | "DESC";
     } | {
-        field: "id" | "name" | "workspaceId";
+        field: "id" | "name" | "workspaceId" | "roomWidth" | "roomLength" | "defaultTableFixtureTemplateId";
         direction?: undefined | "ASC" | "DESC";
     }[];
 }): Observable<{

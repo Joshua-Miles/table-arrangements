@@ -8,22 +8,28 @@ export * from "./UserType";
 
 export * from "./UserWithWorspacesType";
 
-export * from "./createWorkspaceEvent";
-
-export * from "./listWorkspaceEvents";
-
-export * from "./getEvent";
-
-export * from "./listEventAttendees";
-
-export * from "./listEventTables";
-
-export * from "./createEventAttendee";
-
-export * from "./updateEventAttendee";
+export * from "./EventDetailsType";
 
 export * from "./EventType";
 
 export * from "./AttendeeType";
 
 export * from "./TableType";
+
+export * from "./FixtureTemplateType";
+
+export * from "./FixtureType";
+
+export * from "./createWorkspaceEvent";
+
+export * from "./listWorkspaceEvents";
+
+export * from "./getEventDetails";
+
+export * from "./updateEventDetails";
+
+export * from "./createEventTag";
+
+export * from "./createEventFixtureTemplate";
+
+export * from "./createEventFixture";

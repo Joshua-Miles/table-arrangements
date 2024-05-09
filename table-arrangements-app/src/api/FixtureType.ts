@@ -1,20 +1,19 @@
 import type { Reflected } from "@triframe/ambassador";
 
-type IEventType = {
+type IFixtureType = {
     id: number & {
         __serial__?: undefined | true;
     };
-    workspaceId: number;
-    name: string;
-    roomWidth: null | number;
-    roomLength: null | number;
-    defaultTableFixtureTemplateId: null | number;
+    eventId: number;
+    templateId: number;
+    x: number;
+    y: number;
 };
 
-export const EventType = {
+export const FixtureType = {
     kind: "object" as const,
     __isReflected: true as const,
-    name: "Event" as const,
+    name: "Fixture" as const,
     properties: {
         id: {
             kind: "intersection" as const,
@@ -45,46 +44,21 @@ export const EventType = {
                     } as const
                 }] as const
         } as const,
-        workspaceId: {
+        eventId: {
             kind: "number" as const,
             __isReflected: true as const
         } as const,
-        name: {
-            kind: "string" as const,
+        templateId: {
+            kind: "number" as const,
             __isReflected: true as const
         } as const,
-        roomWidth: {
-            kind: "union" as const,
-            __isReflected: true as const,
-            types: [{
-                    kind: "null" as const,
-                    __isReflected: true as const
-                }, {
-                    kind: "number" as const,
-                    __isReflected: true as const
-                }] as const
+        x: {
+            kind: "number" as const,
+            __isReflected: true as const
         } as const,
-        roomLength: {
-            kind: "union" as const,
-            __isReflected: true as const,
-            types: [{
-                    kind: "null" as const,
-                    __isReflected: true as const
-                }, {
-                    kind: "number" as const,
-                    __isReflected: true as const
-                }] as const
-        } as const,
-        defaultTableFixtureTemplateId: {
-            kind: "union" as const,
-            __isReflected: true as const,
-            types: [{
-                    kind: "null" as const,
-                    __isReflected: true as const
-                }, {
-                    kind: "number" as const,
-                    __isReflected: true as const
-                }] as const
+        y: {
+            kind: "number" as const,
+            __isReflected: true as const
         } as const
     } as const
-} as unknown as Reflected<IEventType>;
+} as unknown as Reflected<IFixtureType>;

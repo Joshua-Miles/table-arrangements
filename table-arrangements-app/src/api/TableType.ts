@@ -8,6 +8,7 @@ type ITableType = {
     label: string;
     orderby: number;
     capacity: number;
+    fixtureId: null | number;
 };
 
 export const TableType = {
@@ -59,6 +60,17 @@ export const TableType = {
         capacity: {
             kind: "number" as const,
             __isReflected: true as const
+        } as const,
+        fixtureId: {
+            kind: "union" as const,
+            __isReflected: true as const,
+            types: [{
+                    kind: "null" as const,
+                    __isReflected: true as const
+                }, {
+                    kind: "number" as const,
+                    __isReflected: true as const
+                }] as const
         } as const
     } as const
 } as unknown as Reflected<ITableType>;
