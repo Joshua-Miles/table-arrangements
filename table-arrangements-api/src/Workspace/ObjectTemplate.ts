@@ -16,11 +16,11 @@ export const ObjectTemplates = persist<ObjectTemplate>()
 
 export async function createDefaultObjectTemplates(workspaceId: number) {
     await ObjectTemplates.appendMany([
-        { workspaceId, label: '{length} x {width} Table', shape: 'rectangle', color: '#000000', width: convert(30, 'inches').toBase(), length: convert(8, 'feet').toBase() },
-        { workspaceId, label: '{length} x {width} Table', shape: 'rectangle', color: '#000000', width: convert(30, 'inches').toBase(), length: convert(6, 'feet').toBase() },
-        { workspaceId, label: '{length} Round', shape: 'round', color: '#000000', width: convert(10, 'feet').toBase(), length: convert(10, 'feet').toBase() },
-        { workspaceId, label: '{length} Round', shape: 'round', color: '#000000', width: convert(6, 'feet').toBase(), length: convert(6, 'feet').toBase() },
-        { workspaceId, label: '{length} Round', shape: 'round', color: '#000000', width: convert(5.5, 'feet').toBase(), length: convert(5.5, 'feet').toBase() }
+        { workspaceId, label: '{length} x {width} Table', shape: 'rectangle', color: '#38A169', width: convert(30, 'inches').toBase(), length: convert(8, 'feet').toBase() },
+        { workspaceId, label: '{length} x {width} Table', shape: 'rectangle', color: '#38A169', width: convert(30, 'inches').toBase(), length: convert(6, 'feet').toBase() },
+        { workspaceId, label: '{length} Round', shape: 'round', color: '#38A169', width: convert(10, 'feet').toBase(), length: convert(10, 'feet').toBase() },
+        { workspaceId, label: '{length} Round', shape: 'round', color: '#38A169', width: convert(6, 'feet').toBase(), length: convert(6, 'feet').toBase() },
+        { workspaceId, label: '{length} Round', shape: 'round', color: '#38A169', width: convert(5.5, 'feet').toBase(), length: convert(5.5, 'feet').toBase() }
     ])
 }
 

@@ -108,7 +108,7 @@ export function AssignmentView () {
                     parties={event.parties.filter(party => party.tableId === null)}
                     onPartyAdded={handleNewParty}
                     onPartySelected={setSelectedParty}
-                    width="25vw"
+                    width={300}
                 />
                 <TableArea eventId={eventId} flex={1} event={event} onPartySelected={setSelectedParty} />
                 <DragOverlay>

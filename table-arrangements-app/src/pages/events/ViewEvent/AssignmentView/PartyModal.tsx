@@ -156,7 +156,7 @@ function PartyForm({ party, onSave, onDelete, onCancel }: PartyModalProps & { pa
                         <Button mr={3} onClick={() => onCancel()}>
                             Cancel
                         </Button>
-                        <Button colorScheme='blue' mr={3} onClick={() => onSave(values)}>
+                        <Button colorScheme='blue' mr={3} onClick={() => onSave(values)} disabled={party.attendees.length === 0}>
                             Save
                         </Button>
                     </Flex>

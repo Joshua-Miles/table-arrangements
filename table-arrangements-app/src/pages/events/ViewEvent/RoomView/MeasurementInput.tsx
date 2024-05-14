@@ -1,5 +1,5 @@
 import { ChevronDownIcon } from "@chakra-ui/icons";
-import { Button, Input, InputGroup, InputGroupProps, InputProps, InputRightAddon, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
+import { Button, Input, InputGroup, InputGroupProps, InputProps, InputRightAddon, Menu, MenuButton, MenuItem, MenuList, Portal } from "@chakra-ui/react";
 import { ChangeEvent, useState } from "react";
 import { convert, getAbbreviationFor, UnitOfMeasure, UnitsOfMeasure } from "../UnitOfMeasure";
 
@@ -26,13 +26,15 @@ export function MeasurementInput({ value, onChange, placeholder, ...groupProps}:
                     <MenuButton as={Button} rightIcon={<ChevronDownIcon />} w="100%">
                         {getAbbreviationFor(unitOfMeasure)}
                     </MenuButton>
-                    <MenuList>
-                        {UnitsOfMeasure.map( (unitOfMeasure) => (
-                            <MenuItem onClick={() => setUnitOfMeasure(unitOfMeasure as UnitOfMeasure)}>
-                                {getAbbreviationFor(unitOfMeasure)}
-                            </MenuItem>
-                        ))}
-                    </MenuList>
+                    <Portal>
+                        <MenuList>
+                            {UnitsOfMeasure.map( (unitOfMeasure) => (
+                                <MenuItem onClick={() => setUnitOfMeasure(unitOfMeasure as UnitOfMeasure)}>
+                                    {getAbbreviationFor(unitOfMeasure)}
+                                </MenuItem>
+                            ))}
+                        </MenuList>
+                    </Portal>
                 </Menu>
             </InputRightAddon>
         </InputGroup>

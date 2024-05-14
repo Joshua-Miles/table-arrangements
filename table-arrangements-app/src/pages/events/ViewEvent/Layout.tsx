@@ -10,7 +10,7 @@ export function Layout() {
         <>
             {editor.isAssignmentViewSelected && <AssignmentView />}
             {editor.isRoomViewSelected && <RoomView /> }
-            <ButtonGroup isAttached position="fixed" bottom={4} right={4} size="sm">
+            <ButtonGroup isAttached position="fixed" bottom={4} right={4} size="sm" backgroundColor="white">
                 <Button colorScheme="blue" onClick={() => editor.setView('assignments')} variant={editor.isAssignmentViewSelected ? 'solid' : 'outline'} >
                     Assignment View
                 </Button>

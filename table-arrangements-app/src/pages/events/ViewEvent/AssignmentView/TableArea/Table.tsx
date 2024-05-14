@@ -1,4 +1,4 @@
-import { Alert, AlertDescription, AlertIcon, AlertTitle, Avatar, Button, Card, CardBody, Flex, Input, InputGroup, InputRightAddon, Text, VStack } from "@chakra-ui/react";
+import { Alert, AlertDescription, AlertIcon, AlertTitle, Avatar, Box, Button, Card, CardBody, Flex, Input, InputGroup, InputRightAddon, Text, VStack } from "@chakra-ui/react";
 import { Fragment, useState, FocusEvent} from "react";
 import { DraggablePartyCard } from "../DraggablePartCard";
 import { Party, Table } from "../../fields";
@@ -33,7 +33,9 @@ export function Table({ table, parties, onPartySelected }: TableProps) {
 
     return (
         <Card key={table.id} borderColor={totalAttendees > table.capacity ? 'red' : undefined} borderStyle="solid" borderWidth={1}>
-            <Avatar size="sm" backgroundColor="green.500" name={`${table.number}`} position="absolute" left={-3} top={-3} />
+            <Box borderRadius={25} width={`40px`} height={`40px`} backgroundColor="green.500"  position="absolute" left={-3} top={-3} color="white" display="flex" justifyContent="center" alignItems="center" >
+                {table.number}
+            </Box>
             <CardBody>
                 <Flex justifyContent="space-between">
                     {!isEditingTableLabel

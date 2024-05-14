@@ -1,7 +1,8 @@
-import { Box, Center } from "@chakra-ui/react";
+import { Box, Center, Text } from "@chakra-ui/react";
 import { useDroppable } from "@dnd-kit/core";
-import { SyntheticEvent, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useEventEditor } from "../EventEditor";
+import { format } from "../UnitOfMeasure";
 
 type Props = {
     children: any
@@ -29,16 +30,29 @@ export function RoomDisplay({ children }: Props) {
 
         editor.setScale(
             Math.min(
-                (width) / (editor.getRoomLength() ?? 0),
-                (height) / (editor.getRoomWidth() ?? 0)
+                (width) / ((editor.getRoomLength() ?? 0) + 20000),
+                (height) / ((editor.getRoomWidth() ?? 0) + 20000)
             )
         )
     }
 
+    const { x, y } = editor.getPanOffset();
+
     return (
-        <Center ref={container} width="100%" height="100%">
-            <Box position="relative" width={room.length} height={room.width} border="1px solid gray" ref={setNodeRef}>
+        <Center ref={container} width="100%" height="100%" overflow="hidden">
+            <Box
+                ref={setNodeRef}
+                position="relative"
+                left={`${x}px`}
+                top={`${y}px`}
+                width={room.length}
+                height={room.width}
+                border="1px solid gray"
+                cursor={editor.isAddingObject() ? 'crosshair' : 'pointer'}
+            >
                 {children}
+                <Text position="absolute" left="0%" top="50%" transform="rotate(90deg) translate(-50%, 100%)">{format(editor.getRoomWidth() ?? 0, editor.defaultMeasurementSystem)}</Text>
+                <Text position="absolute" left="50%" transform="translate(-50%)">{format(editor.getRoomLength() ?? 0, editor.defaultMeasurementSystem)}</Text>
             </Box>
         </Center>
     )

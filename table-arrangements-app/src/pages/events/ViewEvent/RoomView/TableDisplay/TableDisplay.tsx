@@ -1,9 +1,10 @@
-import { Box, BoxProps, Text } from "@chakra-ui/react";
+import { Box, BoxProps, List, ListItem, OrderedList, Text, Tooltip, UnorderedList } from "@chakra-ui/react";
 import Color from "color";
-import { forwardRef } from "react";
+import { forwardRef, useState } from "react";
 import { useEventEditor } from "../../EventEditor";
-import { ObjectTemplate, Table } from "../../fields";
+import { Attendee, ObjectTemplate, Table } from "../../fields";
 import { inferTableName } from "../../inferTableLabel";
+
 
 export type TableWithObjectTemplate = Table & {
     shape: 'round' | 'rectangle'
@@ -13,7 +14,9 @@ export type TableWithObjectTemplate = Table & {
 }
 
 export type TableDisplayProps = BoxProps & {
-   table: TableWithObjectTemplate
+    inOverlay?: boolean
+    table: TableWithObjectTemplate
+    inline?: boolean
 }
 
 const shapePropCreators: Record<ObjectTemplate['shape'], (table: TableWithObjectTemplate) => BoxProps> = {
@@ -24,11 +27,11 @@ const shapePropCreators: Record<ObjectTemplate['shape'], (table: TableWithObject
     }
 }
 
-export const TableDisplay = forwardRef(({ table, ...boxProps }: TableDisplayProps, ref) => {
+export const TableDisplay = forwardRef(({ table, inOverlay, inline, ...boxProps }: TableDisplayProps, ref) => {
     const editor = useEventEditor();
-    const { number, label, shape, color, x, y, length, width } = table;
+    const { number, shape, color, x, y, length, width } = table;
 
-    const positionProps: BoxProps = !x || !y
+    const positionProps: BoxProps = !x || !y || inline
         ? { position: 'relative' }
         : {
             position: 'absolute',
@@ -38,12 +41,42 @@ export const TableDisplay = forwardRef(({ table, ...boxProps }: TableDisplayProp
 
     const shapeProps = shapePropCreators[shape](table);
 
-    const numberColor = Color(color).isDark() ? '#ffffff' : '#000000'
+    const numberColor = Color(color).darken(0.05).isDark() ? '#ffffff' : '#000000'
+
+    const attendees = editor.getPartiesForTable(table.id)
+        .reduce( (allAttendees, party) => [ ...allAttendees, ...party.attendees ], [] as Attendee[])
+        .map( attendee =>
+            attendee.tagId
+                ? `${attendee.name} - ${editor.getTag(attendee.tagId)?.label}`
+                : attendee.name
+        )
+
+    function handleClick() {
+        editor.selectTable(table)
+    }
 
     return (
-        <Box backgroundColor={color} w={length} h={width} {...shapeProps} {...positionProps} {...boxProps} ref={ref}>
-            <Text position="absolute" top="50%" transform="translateY(-50%)" color={numberColor} w="100%" textAlign="center">{number}</Text>
-            <Text noOfLines={1} position="absolute"  top="100%" w="100%" textAlign="center">{inferTableName(table, editor.getParties())} Table</Text>
-        </Box>
+        <Tooltip placement="right" isDisabled={attendees.length === 0 || boxProps.visibility === 'hidden' || inOverlay} label={
+            <OrderedList>
+                {attendees.map( attendee =>
+                    <ListItem key={attendee}>{attendee}</ListItem>
+                )}
+            </OrderedList>
+        }>
+            <Box
+                ref={ref}
+                backgroundColor={color}
+                w={length}
+                h={width}
+                {...shapeProps}
+                {...positionProps}
+                {...boxProps}
+                onClick={handleClick}
+            >
+                <Box display={editor.isTableSelected(table) ? 'block' : 'none'} position="absolute" left="-5px" top="-5px" w={`${length + 10}px`} h={`${width + 10}px`}  border='1px solid' borderColor= 'blue.500' />
+                <Text position="absolute" top="50%" transform="translateY(-50%)" color={numberColor} w="100%" textAlign="center">{number}</Text>
+                {!inline && <Text backgroundColor="whiteAlpha.700" noOfLines={1} position="absolute"  top="100%" w="100%" textAlign="center">{inferTableName(table, editor.getParties())}</Text>}
+            </Box>
+        </Tooltip>
     )
 })
