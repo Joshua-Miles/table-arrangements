@@ -101,8 +101,8 @@ export function AssignmentView () {
     if (isLoading(event) || isAnyFailure(event)) return null
 
     return (
-        <Flex height="100%">
-            <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd} collisionDetection={closestCenter}>
+        <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd} collisionDetection={closestCenter}>
+            <Flex flex={1} height="100%">
                 <PartyList
                     eventId={eventId}
                     parties={event.parties.filter(party => party.tableId === null)}
@@ -119,14 +119,14 @@ export function AssignmentView () {
                         />
                     }
                 </DragOverlay>
-            </DndContext>
-            <PartyModal
-                party={selectedParty}
-                onCancel={() => setSelectedParty(null)}
-                onSave={handlePartySaved}
-                onDelete={handlePartyDeleted}
-            />
-        </Flex>
+                <PartyModal
+                    party={selectedParty}
+                    onCancel={() => setSelectedParty(null)}
+                    onSave={handlePartySaved}
+                    onDelete={handlePartyDeleted}
+                />
+            </Flex>
+        </DndContext>
     )
 }
 

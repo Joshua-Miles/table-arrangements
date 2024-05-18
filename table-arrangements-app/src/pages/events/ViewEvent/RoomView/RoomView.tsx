@@ -61,45 +61,43 @@ export function RoomView() {
     const room = editor.getScaledRoom();
 
     return (
-        <Flex direction="column" height="100%">
-            <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd} sensors={[ mouseSensor ]} >
-                <Flex flex={1} height="100%">
-                    <Sidebar />
-                    <Box flex={1} p={4} overflow="hidden" position="relative" height="100%">
-                        <RoomDisplay>
-                            <Gridlines />
-                            {room.tables.map( table => (
-                                <DraggableTableDisplay key={table.id ?? 'new-table'} table={table} />
-                            ))}
-                            {room.fixtures.map( fixture => (
-                                <DraggableFixtureDisplay key={fixture.id ?? 'new-fixture'} fixture={fixture} />
-                            ))}
-                            <FixtureBeingAdded />
-                        </RoomDisplay>
-                        <HStack position="absolute" bottom={4} left={4}  backgroundColor="white">
-                            <ButtonGroup isAttached size="sm">
-                                <Button  onClick={() => editor.zoomOut()}  >
-                                    <MinusIcon />
-                                </Button>
-                                <Button  onClick={() => editor.zoomIn()} >
-                                    <AddIcon />
-                                </Button>
-                            </ButtonGroup>
-                            <Checkbox isChecked={editor.shouldShowGridlines} onChange={() => editor.toggleGridlines()}>
-                                Gridlines
-                            </Checkbox>
-                        </HStack>
-                    </Box>
-                </Flex>
-                <DragOverlay>
-                    {dragged?.type === 'table' && dragged.table !== null &&
-                        <TableDisplay table={dragged.table} inOverlay={true} />
-                    }
-                     {dragged?.type === 'fixture' && dragged.fixture !== null &&
-                        <FixtureDisplay fixture={dragged.fixture} inOverlay={true} />
-                    }
-                </DragOverlay>
-            </DndContext>
-        </Flex>
+        <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd} sensors={[ mouseSensor ]} >
+            <Flex flex={1} height="100%">
+                <Sidebar />
+                <Box flex={1} p={4} overflow="hidden" position="relative" height="100%">
+                    <RoomDisplay>
+                        <Gridlines />
+                        {room.tables.map( table => (
+                            <DraggableTableDisplay key={table.id ?? 'new-table'} table={table} />
+                        ))}
+                        {room.fixtures.map( fixture => (
+                            <DraggableFixtureDisplay key={fixture.id ?? 'new-fixture'} fixture={fixture} />
+                        ))}
+                        <FixtureBeingAdded />
+                    </RoomDisplay>
+                    <HStack position="absolute" bottom={4} left={4}  backgroundColor="white">
+                        <ButtonGroup isAttached size="sm">
+                            <Button  onClick={() => editor.zoomOut()}  >
+                                <MinusIcon />
+                            </Button>
+                            <Button  onClick={() => editor.zoomIn()} >
+                                <AddIcon />
+                            </Button>
+                        </ButtonGroup>
+                        <Checkbox isChecked={editor.shouldShowGridlines} onChange={() => editor.toggleGridlines()}>
+                            Gridlines
+                        </Checkbox>
+                    </HStack>
+                </Box>
+            </Flex>
+            <DragOverlay>
+                {dragged?.type === 'table' && dragged.table !== null &&
+                    <TableDisplay table={dragged.table} inOverlay={true} />
+                }
+                    {dragged?.type === 'fixture' && dragged.fixture !== null &&
+                    <FixtureDisplay fixture={dragged.fixture} inOverlay={true} />
+                }
+            </DragOverlay>
+        </DndContext>
     )
 }

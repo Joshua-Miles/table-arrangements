@@ -1,10 +1,10 @@
-import { AddIcon, ChevronDownIcon } from "@chakra-ui/icons";
-import { Box, Button, Center, Flex, FlexProps, HStack, Icon, Input, Menu, MenuButton, MenuItem, MenuList, Text, VStack } from "@chakra-ui/react";
+import { AddIcon } from "@chakra-ui/icons";
+import { Box, Button, Center, Flex, FlexProps, Icon, Input, Menu, MenuButton, MenuItem, MenuList, Portal, Text, VStack } from "@chakra-ui/react";
 import { useEventEditor } from "../../EventEditor";
-import { DraggableTableDisplay, TableDisplay, TableWithObjectTemplate } from "../TableDisplay";
+import { DraggableTableDisplay, TableDisplay } from "../TableDisplay";
 import { BiSquare, BiCircle } from 'react-icons/bi'
 import { FixtureDisplay } from "../FixtureDisplay";
-import { Fixture, PlacedTable, Table } from "../../fields";
+import { Fixture, PlacedTable } from "../../fields";
 import { inferTableName } from "../../inferTableLabel";
 import { useState } from "react";
 
@@ -25,32 +25,32 @@ export function DefaultPanel() {
 
     const tableResults = placedTables.filter( table => inferTableName(table, editor.getParties()).toLowerCase().includes(searchTerm.toLowerCase()))
 
-
     return (
         <VStack align="stretch" spacing={10}>
             <Box  p={2}>
                 <Input placeholder="Search" value={searchTerm} onChange={e => setSearchTerm(e.target.value)} />
                 <Flex justify="flex-end">
-                    <Menu>
+                    <Menu placement="end">
                         <MenuButton
                             as={Button}
                             colorScheme="blue"
                             variant="ghost"
                             aria-label="Add Fixture"
                             leftIcon={<AddIcon /> }
-                            rightIcon={<ChevronDownIcon />}
                             size="xs"
                         >
-                            Fixture
+                            Add Fixture
                         </MenuButton>
-                        <MenuList>
-                            <MenuItem icon={<Icon as={BiSquare} />} onClick={() => editor.initiateAddingObject('rectangle')}>
-                                Rectangle
-                            </MenuItem>
-                            <MenuItem icon={<Icon as={BiCircle} />} onClick={() => editor.initiateAddingObject('round')}>
-                                Oval
-                            </MenuItem>
-                        </MenuList>
+                        <Portal>
+                            <MenuList>
+                                <MenuItem icon={<Icon as={BiSquare} />} onClick={() => editor.initiateAddingObject('rectangle')}>
+                                    Rectangle
+                                </MenuItem>
+                                <MenuItem icon={<Icon as={BiCircle} />} onClick={() => editor.initiateAddingObject('round')}>
+                                    Oval
+                                </MenuItem>
+                            </MenuList>
+                        </Portal>
                     </Menu>
                 </Flex>
             </Box>
@@ -71,13 +71,13 @@ export function DefaultPanel() {
                 {fixtureResults.map( fixture => (
                     <PanelButton onClick={() => editor.selectFixture(fixture)}>
                         <Text>{fixture.label || 'Unnamed'}</Text>
-                        <FixtureDisplay inline fixture={scale(fixture)} />
+                        <FixtureDisplay inline fixture={scale(fixture, editor.scale)} />
                     </PanelButton>
                 ))}
                 {tableResults.map( table => (
                     <PanelButton onClick={() => editor.selectTable(table)}>
                         <Text>{inferTableName(table, editor.getParties())}</Text>
-                        <TableDisplay inline table={scale(table)} />
+                        <TableDisplay inline table={scale(table, editor.scale)} />
                     </PanelButton>
                 ))}
             </VStack>
@@ -97,8 +97,8 @@ function PanelButton(props: FlexProps) {
     />
 }
 
-function scale<T extends (PlacedTable | Fixture)> (roomObject: T): T {
-    const scale = Math.min(150 / roomObject.length, 50 / roomObject.width, 1)
+function scale<T extends (PlacedTable | Fixture)> (roomObject: T, maxScale: number = 1): T {
+    const scale = Math.min(150 / roomObject.length, 50 / roomObject.width, maxScale)
 
     return {
         ...roomObject,

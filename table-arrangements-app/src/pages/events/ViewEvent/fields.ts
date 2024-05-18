@@ -7,6 +7,7 @@ export const eventDetailFields = (
         .name()
         .roomWidth()
         .roomLength()
+        .workspaceId()
         .defaultTableObjectTemplateId()
         .tables( (table) => (
             table

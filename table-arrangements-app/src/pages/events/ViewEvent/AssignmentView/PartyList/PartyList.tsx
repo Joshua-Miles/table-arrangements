@@ -23,7 +23,7 @@ export function PartyList({ eventId, onPartyAdded, onPartySelected, ...boxProps 
 
     const unplacedParties = editor.getUnplacedParties();
 
-    const { setNodeRef, isOver } = useDroppable({
+    const { setNodeRef } = useDroppable({
         id: `drop-target-unseat`,
         data: {
             tableId: null,

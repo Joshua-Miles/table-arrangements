@@ -1,5 +1,7 @@
 import type { Reflected } from "@triframe/ambassador";
 
+import type { Observable } from "@triframe/ambassador";
+
 type IObjectTemplateType = {
     id: number & {
         __serial__?: undefined | true;

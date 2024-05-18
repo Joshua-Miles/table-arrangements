@@ -11,6 +11,10 @@ export { assertUserHasRoleOnWorkspace, } from './assertUserHasRoleOnWorkspace'
 
 export { ObjectTemplates } from './ObjectTemplate';
 
-export const PublicWorkspaceInterface = {
+import { getWorkspaceDetails, WorkspaceDetails } from './getWorkspaceDetails';
 
+export const PublicWorkspaceInterface = {
+    getWorkspaceDetails,
+
+    WorkspaceDetailsType: WorkspaceDetails.type
 }

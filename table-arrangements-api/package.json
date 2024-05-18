@@ -12,19 +12,16 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@triframe/scribe": "^0.0.1",
-    "@triframe/proprietor": "^0.0.1",
-    "luxon": "^3.4.4",
-    "qrcode": "^1.5.3",
+    "@triframe/proprietor": "file:../../../libraries/proprietor",
+    "@triframe/scribe": "file:../../../libraries/scribe",
     "@types/qrcode": "^1.5.5",
     "bcrypt": "^5.1.1",
-    "@triframe/gcp-file-store": "^0.0.1"
+    "luxon": "^3.4.4",
+    "qrcode": "^1.5.3"
   },
   "devDependencies": {
-    "@triframe/mason": "^0.0.1",
-    "@triframe/transpiler": "^0.0.1",
-    "@types/node": "^20.9.0",
+    "@types/bcrypt": "^5.0.2",
     "@types/luxon": "^3.3.4",
-    "@types/bcrypt": "^5.0.2"
+    "@types/node": "^20.9.0"
   }
 }

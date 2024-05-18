@@ -302,6 +302,14 @@ class EventEditor {
         return this.eventDetails.id as number
     }
 
+    getEventName() {
+        return this.eventDetails.name;
+    }
+
+    getWorkspaceId() {
+        return this.eventDetails.workspaceId;
+    }
+
     getRoomWidth() {
         return this.eventDetails.roomWidth;
     }

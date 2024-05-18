@@ -2,11 +2,17 @@ export * from "./getLoggedInUser";
 
 export * from "./login";
 
+export * from "./logout";
+
 export * from "./signUp";
 
 export * from "./UserType";
 
 export * from "./UserWithWorspacesType";
+
+export * from "./getWorkspaceDetails";
+
+export * from "./WorkspaceDetailsType";
 
 export * from "./EventDetailsType";
 
