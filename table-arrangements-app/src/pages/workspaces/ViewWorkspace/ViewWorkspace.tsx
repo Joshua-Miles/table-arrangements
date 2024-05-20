@@ -8,6 +8,7 @@ import { useState } from "react";
 import { CreateEventModal } from "./CreateEventModal";
 import { Link } from 'react-router-dom'
 import { inferWorkspaceName, NavBar, NavBarIconButton, NavBarProfileControl, NavBarText } from "../../../_shared";
+import { WorkspaceDrawer } from "../../../_shared/WorkspaceDrawer";
 
 export function ViewWorkspace() {
     const params = useParams();
@@ -29,6 +30,8 @@ export function ViewWorkspace() {
             .name()
     })
 
+    const [ isWorkspaceDrawerOpen, setIsWorkspaceDrawerOpen ] = useState(false);
+
     const [ createEventModalIsOpen, setCreateEventModalIsOpen ] = useState(false);
 
     if (isLoading(events)  || isLoading(workspace)) return null;
@@ -47,6 +50,7 @@ export function ViewWorkspace() {
                 <NavBarIconButton
                     aria-label="Menu"
                     icon={<HamburgerIcon />}
+                    onClick={() => setIsWorkspaceDrawerOpen(true)}
                 />
                 <NavBarText>
                     {inferWorkspaceName(workspace)}
@@ -75,6 +79,7 @@ export function ViewWorkspace() {
                     onClose={() => setCreateEventModalIsOpen(false)}
                 />
             </Container>
+            <WorkspaceDrawer isOpen={isWorkspaceDrawerOpen} onClose={() => setIsWorkspaceDrawerOpen(false)} />
         </>
     )
 }
