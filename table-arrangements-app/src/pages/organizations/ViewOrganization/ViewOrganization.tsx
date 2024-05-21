@@ -1,30 +1,26 @@
 import { isLoading, useResult } from "@triframe/utils-react"
 import { Navigate, useParams } from "react-router-dom"
-import { getWorkspaceDetails, listWorkspaceEvents, WorkspaceDetailsType, EventType } from "../../../api"
+import { OrganizationType, EventType, getOrganization, listOrganizationEvents } from "../../../api"
 import { from, isFailure } from '@triframe/ambassador';
-import { Button, Card, CardBody, Center, Container, Flex, MenuIcon, VStack } from "@chakra-ui/react";
+import { Button, Card, CardBody, Center, Container, Flex, VStack } from "@chakra-ui/react";
 import { AddIcon, HamburgerIcon } from '@chakra-ui/icons';
 import { useState } from "react";
 import { CreateEventModal } from "./CreateEventModal";
 import { Link } from 'react-router-dom'
-import { inferWorkspaceName, NavBar, NavBarIconButton, NavBarProfileControl, NavBarText } from "../../../_shared";
+import { NavBar, NavBarIconButton, NavBarText } from "../../../_shared";
 import { WorkspaceDrawer } from "../../../_shared/WorkspaceDrawer";
 
-export function ViewWorkspace() {
+export function ViewOrganization() {
     const params = useParams();
 
-    const workspaceId = Number(params.workspaceId);
+    const organizationId = Number(params.organizationId);
 
-    const workspace = useResult(getWorkspaceDetails, workspaceId, {
-        select: from(WorkspaceDetailsType)
+    const organization = useResult(getOrganization, organizationId, {
+        select: from(OrganizationType)
             .name()
-            .creator( creator => (
-                creator
-                    .firstName()
-            ))
     })
 
-    const events = useResult(listWorkspaceEvents, workspaceId, {
+    const events = useResult(listOrganizationEvents, organizationId, {
         select: from(EventType)
             .id()
             .name()
@@ -34,9 +30,9 @@ export function ViewWorkspace() {
 
     const [ createEventModalIsOpen, setCreateEventModalIsOpen ] = useState(false);
 
-    if (isLoading(events)  || isLoading(workspace)) return null;
+    if (isLoading(events)  || isLoading(organization)) return null;
 
-    if (isFailure(events, 'userUnauthorized') || isFailure(workspace, 'userUnauthorized')) {
+    if (isFailure(events, 'userUnauthorized') || isFailure(organization, 'userUnauthorized')) {
         return (
             <Center>
                 You are not authorized to view events for this workspace
@@ -53,7 +49,7 @@ export function ViewWorkspace() {
                     onClick={() => setIsWorkspaceDrawerOpen(true)}
                 />
                 <NavBarText>
-                    {inferWorkspaceName(workspace)}
+                    {organization.name}
                 </NavBarText>
             </NavBar>
             <Container maxWidth="container.lg">
@@ -74,7 +70,7 @@ export function ViewWorkspace() {
                     ))}
                 </VStack>
                 <CreateEventModal
-                    workspaceId={workspaceId}
+                    organizationId={organizationId}
                     isOpen={createEventModalIsOpen}
                     onClose={() => setCreateEventModalIsOpen(false)}
                 />

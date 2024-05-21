@@ -2,21 +2,17 @@ import type { Reflected } from "@triframe/ambassador";
 
 import type { Observable } from "@triframe/ambassador";
 
-type IEventType = {
+type IOrganizationType = {
     id: number & {
         __serial__?: undefined | true;
     };
-    organizationId: number;
     name: string;
-    roomWidth: null | number;
-    roomLength: null | number;
-    defaultTableObjectTemplateId: null | number;
 };
 
-export const EventType = {
+export const OrganizationType = {
     kind: "object" as const,
     __isReflected: true as const,
-    name: "Event" as const,
+    name: "Organization" as const,
     properties: {
         id: {
             kind: "intersection" as const,
@@ -47,46 +43,9 @@ export const EventType = {
                     } as const
                 }] as const
         } as const,
-        organizationId: {
-            kind: "number" as const,
-            __isReflected: true as const
-        } as const,
         name: {
             kind: "string" as const,
             __isReflected: true as const
-        } as const,
-        roomWidth: {
-            kind: "union" as const,
-            __isReflected: true as const,
-            types: [{
-                    kind: "null" as const,
-                    __isReflected: true as const
-                }, {
-                    kind: "number" as const,
-                    __isReflected: true as const
-                }] as const
-        } as const,
-        roomLength: {
-            kind: "union" as const,
-            __isReflected: true as const,
-            types: [{
-                    kind: "null" as const,
-                    __isReflected: true as const
-                }, {
-                    kind: "number" as const,
-                    __isReflected: true as const
-                }] as const
-        } as const,
-        defaultTableObjectTemplateId: {
-            kind: "union" as const,
-            __isReflected: true as const,
-            types: [{
-                    kind: "null" as const,
-                    __isReflected: true as const
-                }, {
-                    kind: "number" as const,
-                    __isReflected: true as const
-                }] as const
         } as const
     } as const
-} as unknown as Reflected<IEventType>;
+} as unknown as Reflected<IOrganizationType>;

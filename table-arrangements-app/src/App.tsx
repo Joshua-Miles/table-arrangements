@@ -5,8 +5,8 @@ import * as ApiInterface from './api';
 import { SignUp } from "./pages/SignUp";
 import { Login } from "./pages/Login";
 import { Homepage } from "./pages/Homepage";
-import { ViewWorkspace } from "./pages/workspaces/ViewWorkspace/ViewWorkspace";
 import { ViewEvent } from "./pages/events/ViewEvent";
+import { ViewOrganization } from "./pages/organizations/ViewOrganization";
 
 Object.assign(window, ApiInterface);
 
@@ -24,8 +24,8 @@ const router = createBrowserRouter([
     element: <Login />
   },
   {
-    path: "/workspaces/:workspaceId",
-    element: <ViewWorkspace />
+    path: "/organizations/:organizationId",
+    element: <ViewOrganization />
   },
   {
     path: "/events/:eventId",

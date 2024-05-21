@@ -2,7 +2,7 @@ import { persist, Serial } from "@triframe/scribe";
 
 export type Event = {
     id: Serial
-    workspaceId: number
+    organizationId: number
     name: string
     roomWidth: number | null
     roomLength: number | null
@@ -11,4 +11,4 @@ export type Event = {
 
 export const Events = persist<Event>()
     .primaryKey('id')
-    .indexBy('workspaceId');
+    .indexBy('organizationId');

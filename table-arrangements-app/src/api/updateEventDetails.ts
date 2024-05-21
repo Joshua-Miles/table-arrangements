@@ -44,7 +44,7 @@ export function updateEventDetails(this: AmbassadorClient | void, eventId: numbe
         tableId?: undefined | null | number;
     })[];
     id?: undefined | number;
-    workspaceId?: undefined | number;
+    organizationId?: undefined | number;
     name?: undefined | string;
     roomWidth?: undefined | null | number;
     roomLength?: undefined | null | number;
@@ -111,7 +111,7 @@ export function updateEventDetails(this: AmbassadorClient | void, eventId: numbe
     id: number & {
         __serial__?: undefined | true;
     };
-    workspaceId: number;
+    organizationId: number;
     name: string;
     roomWidth: null | number;
     roomLength: null | number;

@@ -4,14 +4,14 @@ import type { Observable } from "@triframe/ambassador";
 
 import type { PageArray } from "@triframe/ambassador";
 
-export function listWorkspaceEvents<S>(this: AmbassadorClient | void, workspaceId: number, options: {
+export function listOrganizationEvents<S>(this: AmbassadorClient | void, organizationId: number, options: {
     select: {
         ᑕ_model: {};
         ᑕ_superset?: undefined | {
             id: number & {
                 __serial__?: undefined | true;
             };
-            workspaceId: number;
+            organizationId: number;
             name: string;
             roomWidth: null | number;
             roomLength: null | number;
@@ -22,10 +22,10 @@ export function listWorkspaceEvents<S>(this: AmbassadorClient | void, workspaceI
     limit?: undefined | number;
     offset?: undefined | number;
     sort?: undefined | {
-        field: "id" | "name" | "workspaceId" | "roomWidth" | "roomLength" | "defaultTableObjectTemplateId";
+        field: "id" | "name" | "organizationId" | "roomWidth" | "roomLength" | "defaultTableObjectTemplateId";
         direction?: undefined | "ASC" | "DESC";
     } | {
-        field: "id" | "name" | "workspaceId" | "roomWidth" | "roomLength" | "defaultTableObjectTemplateId";
+        field: "id" | "name" | "organizationId" | "roomWidth" | "roomLength" | "defaultTableObjectTemplateId";
         direction?: undefined | "ASC" | "DESC";
     }[];
 }): Observable<{
@@ -33,5 +33,5 @@ export function listWorkspaceEvents<S>(this: AmbassadorClient | void, workspaceI
     code: "userUnauthorized";
 } | PageArray<S>> {
     let api = AmbassadorClient.get(this, process.env.API_URL as string);
-    return api.callRemoteObservableFunction("listWorkspaceEvents", workspaceId, options);
+    return api.callRemoteObservableFunction("listOrganizationEvents", organizationId, options);
 }

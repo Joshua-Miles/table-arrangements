@@ -3,7 +3,10 @@ import { logout } from "./logout"
 import { signUp } from "./signUp"
 import { getLoggedInUser } from "./getLoggedInUser"
 import { Users } from "./User"
-import { UserWithWorkspaces } from "./UserWithWorkspaces"
+import { UsersWithOrganization } from "./UserWithOrganization"
+
+export { UserRoles, UserRole } from './UserRoles';
+export { assertUserHasRole } from './assertUserHasRole'
 
 export const PublicUserInterface = {
     getLoggedInUser,
@@ -11,5 +14,5 @@ export const PublicUserInterface = {
     logout,
     signUp,
     UserType: Users.omit('passwordDigest').type,
-    UserWithWorspacesType: UserWithWorkspaces.omit('passwordDigest').type
+    UserWithOrganizationType: UsersWithOrganization.omit('passwordDigest').type
 }

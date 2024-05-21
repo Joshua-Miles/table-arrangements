@@ -3,35 +3,32 @@ import {
   Modal,
   ModalOverlay,
   ModalContent,
-  ModalHeader,
   ModalFooter,
   ModalBody,
-  ModalCloseButton,
   Button,
   FormControl,
   FormLabel,
   Input,
   FormErrorMessage,
   VStack,
-  Flex,
   HStack,
 } from "@chakra-ui/react";
 import { FailuresFrom, isAnyFailure, isFailure } from "@triframe/ambassador";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { createWorkspaceEvent } from "../../../api";
+import { createOrganizationEvent } from "../../../api";
 
 type CreateEventModalProps = {
-    workspaceId: number
+    organizationId: number
     isOpen: boolean
     onClose: () => void
 };
 
-type CreateEventOptions = Parameters<typeof createWorkspaceEvent>[1]
+type CreateEventOptions = Parameters<typeof createOrganizationEvent>[1]
 
-type CreateEventFailure = FailuresFrom<typeof createWorkspaceEvent>;
+type CreateEventFailure = FailuresFrom<typeof createOrganizationEvent>;
 
-export function CreateEventModal({ workspaceId, isOpen, onClose }: CreateEventModalProps) {
+export function CreateEventModal({ organizationId, isOpen, onClose }: CreateEventModalProps) {
 
     const [ options, setOptions ] = useState<CreateEventOptions>({
         name: '',
@@ -49,7 +46,7 @@ export function CreateEventModal({ workspaceId, isOpen, onClose }: CreateEventMo
     }
 
     async function handleAddEvent() {
-        const result = await createWorkspaceEvent(workspaceId, options)
+        const result = await createOrganizationEvent(organizationId, options)
         if (isAnyFailure(result)) return setFailure(result);
         navigate(`/events/${result.id}`);
     }

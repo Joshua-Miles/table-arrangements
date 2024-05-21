@@ -3,6 +3,7 @@ import { AmbassadorClient } from "@triframe/ambassador";
 export function signUp(this: AmbassadorClient | void, options: {
     firstName: string;
     lastName: string;
+    organizationName?: undefined | string;
     email: string;
     password: string;
 }): Promise<(number & {

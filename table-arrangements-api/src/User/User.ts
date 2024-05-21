@@ -2,6 +2,8 @@ import { persist, Serial } from "@triframe/scribe";
 
 export type User = {
     id: Serial;
+    organizationId: number;
+    role: number;
     firstName: string;
     lastName: string;
     email: string;
@@ -10,4 +12,5 @@ export type User = {
 
 export const Users = persist<User>()
     .primaryKey('id')
-    .uniqueIndexBy('email');
+    .uniqueIndexBy('email')
+    .indexBy('organizationId');

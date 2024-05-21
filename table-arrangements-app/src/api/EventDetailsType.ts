@@ -6,7 +6,7 @@ type IEventDetailsType = {
     id: number & {
         __serial__?: undefined | true;
     };
-    workspaceId: number;
+    organizationId: number;
     name: string;
     roomWidth: null | number;
     roomLength: null | number;
@@ -103,7 +103,7 @@ export const EventDetailsType = {
                     } as const
                 }] as const
         } as const,
-        workspaceId: {
+        organizationId: {
             kind: "number" as const,
             __isReflected: true as const
         } as const,

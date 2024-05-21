@@ -13,6 +13,7 @@ export function SignUp() {
     const [ options, setOptions ] = useState<SignUpOptions>({
         firstName: '',
         lastName: '',
+        organizationName: '',
         email: '',
         password: '',
     })
@@ -60,6 +61,13 @@ export function SignUp() {
                         </FormErrorMessage>
                     </FormControl>
                 </HStack>
+                <FormControl>
+                    <FormLabel>Organization</FormLabel>
+                    <Input size='lg' placeholder="Enter your organization name (optional)"
+                        value={options.organizationName}
+                        onChange={e => setOption('organizationName', e.target.value)}
+                    />
+                </FormControl>
                 <FormControl isInvalid={isFailure(failure, 'emailIsInUse') || isFailure(failure, 'emailIsInvalid')}>
                     <FormLabel>Email</FormLabel>
                     <Input placeholder="Enter your email address" size='lg'

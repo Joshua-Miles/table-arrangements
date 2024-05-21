@@ -6,7 +6,7 @@ type IObjectTemplateType = {
     id: number & {
         __serial__?: undefined | true;
     };
-    workspaceId: number;
+    organizationId: number;
     label: string;
     shape: "round" | "rectangle";
     color: string;
@@ -48,7 +48,7 @@ export const ObjectTemplateType = {
                     } as const
                 }] as const
         } as const,
-        workspaceId: {
+        organizationId: {
             kind: "number" as const,
             __isReflected: true as const
         } as const,

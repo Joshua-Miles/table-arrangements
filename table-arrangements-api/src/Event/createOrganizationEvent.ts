@@ -1,27 +1,27 @@
 import { Client } from "@triframe/proprietor";
 import { makeFailure } from "@triframe/scribe";
 import { Session } from "../Session";
-import { WorkspaceUserRoles, assertUserHasRoleOnWorkspace } from "../Workspace";
 import { Events } from "./Event";
 import { Tables } from "./Table";
+import { assertUserHasRole, UserRoles } from "../User";
 
-type CreateWorkspaceEventOptions = {
+type CreateOrganizationEventOptions = {
     name: string;
     numberOfTables: null | number
     tableCapacity: null | number
 }
 
-export async function createWorkspaceEvent(client: Client<Session>, workspaceId: number, options: CreateWorkspaceEventOptions) {
+export async function createOrganizationEvent(client: Client<Session>, organizationId: number, options: CreateOrganizationEventOptions) {
     const { loggedInUserId } = await client.getSession();
 
     const { name, numberOfTables, tableCapacity } = options;
 
     if (!name) return makeFailure('nameCannotBeEmpty', {});
 
-    const authorizationFailure = await assertUserHasRoleOnWorkspace(workspaceId, loggedInUserId, WorkspaceUserRoles.collaborator);
+    const authorizationFailure = await assertUserHasRole(loggedInUserId, organizationId, UserRoles.collaborator);
     if (authorizationFailure) return authorizationFailure;
 
-    const event = await Events.append({ workspaceId, name })
+    const event = await Events.append({ organizationId, name })
 
     if (numberOfTables && tableCapacity) {
         await Tables.appendMany(new Array(numberOfTables).fill(null).map( (_, index) => ({

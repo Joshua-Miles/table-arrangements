@@ -61,7 +61,7 @@ export function getEventDetails<S>(this: AmbassadorClient | void, eventId: numbe
             id: number & {
                 __serial__?: undefined | true;
             };
-            workspaceId: number;
+            organizationId: number;
             name: string;
             roomWidth: null | number;
             roomLength: null | number;

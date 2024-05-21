@@ -306,8 +306,8 @@ class EventEditor {
         return this.eventDetails.name;
     }
 
-    getWorkspaceId() {
-        return this.eventDetails.workspaceId;
+    getOrganizationId() {
+        return this.eventDetails.organizationId;
     }
 
     getRoomWidth() {

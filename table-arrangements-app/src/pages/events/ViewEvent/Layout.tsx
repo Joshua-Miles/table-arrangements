@@ -14,7 +14,7 @@ export function Layout() {
                 <NavBarIconButton
                     aria-label="Back"
                     icon={<ChevronLeftIcon />}
-                    to={`/workspaces/${editor.getWorkspaceId()}`}
+                    to={`/organizations/${editor.getOrganizationId()}`}
                 />
                 <NavBarText>{editor.getEventName()}</NavBarText>
             </NavBar>

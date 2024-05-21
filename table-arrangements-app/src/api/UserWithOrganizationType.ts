@@ -1,24 +1,24 @@
 import type { Reflected } from "@triframe/ambassador";
 
-type IUserWithWorspacesType = {
+type IUserWithOrganizationType = {
     id: number & {
         __serial__?: undefined | true;
     };
+    organizationId: number;
+    role: number;
     firstName: string;
     lastName: string;
     email: string;
     passwordDigest: string;
-    personalWorkspace: {
+    organization: {
         id: number & {
             __serial__?: undefined | true;
         };
-        name: null | string;
-        isPersonalWorkspace: boolean;
-        creatorId: number;
+        name: string;
     };
 };
 
-export const UserWithWorspacesType = {
+export const UserWithOrganizationType = {
     kind: "object" as const,
     __isReflected: true as const,
     properties: {
@@ -51,6 +51,14 @@ export const UserWithWorspacesType = {
                     } as const
                 }] as const
         } as const,
+        organizationId: {
+            kind: "number" as const,
+            __isReflected: true as const
+        } as const,
+        role: {
+            kind: "number" as const,
+            __isReflected: true as const
+        } as const,
         firstName: {
             kind: "string" as const,
             __isReflected: true as const
@@ -67,10 +75,10 @@ export const UserWithWorspacesType = {
             kind: "string" as const,
             __isReflected: true as const
         } as const,
-        personalWorkspace: {
+        organization: {
             kind: "object" as const,
             __isReflected: true as const,
-            name: "Workspace" as const,
+            name: "Organization" as const,
             properties: {
                 id: {
                     kind: "intersection" as const,
@@ -102,25 +110,10 @@ export const UserWithWorspacesType = {
                         }] as const
                 } as const,
                 name: {
-                    kind: "union" as const,
-                    __isReflected: true as const,
-                    types: [{
-                            kind: "null" as const,
-                            __isReflected: true as const
-                        }, {
-                            kind: "string" as const,
-                            __isReflected: true as const
-                        }] as const
-                } as const,
-                isPersonalWorkspace: {
-                    kind: "boolean" as const,
-                    __isReflected: true as const
-                } as const,
-                creatorId: {
-                    kind: "number" as const,
+                    kind: "string" as const,
                     __isReflected: true as const
                 } as const
             } as const
         } as const
     } as const
-} as unknown as Reflected<IUserWithWorspacesType>;
+} as unknown as Reflected<IUserWithOrganizationType>;

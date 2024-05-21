@@ -1,14 +1,16 @@
 import { isLoading, useResult } from '@triframe/utils-react'
 import { from } from '@triframe/ambassador'
-import { getLoggedInUser, UserWithWorspacesType } from '../api'
+import { getLoggedInUser, UserWithOrganizationType } from '../api'
 import { Navigate } from 'react-router-dom'
 
 export function Homepage() {
     const loggedInUser = useResult(getLoggedInUser, {
-        select: from(UserWithWorspacesType)
+        select: from(UserWithOrganizationType)
             .email()
-            .personalWorkspace( w => (
-                w.id()
+            .organization( organization => (
+                organization
+                    .id()
+                    .name()
             ))
     })
 
@@ -16,5 +18,5 @@ export function Homepage() {
 
     if (loggedInUser === null) return <Navigate to="/login" />
 
-    return <Navigate to={`/workspaces/${loggedInUser.personalWorkspace.id}`} />
+    return <Navigate to={`/organizations/${loggedInUser.organization.id}`} />
 }

@@ -8,11 +8,11 @@ export * from "./signUp";
 
 export * from "./UserType";
 
-export * from "./UserWithWorspacesType";
+export * from "./UserWithOrganizationType";
 
-export * from "./getWorkspaceDetails";
+export * from "./getOrganization";
 
-export * from "./WorkspaceDetailsType";
+export * from "./OrganizationType";
 
 export * from "./EventDetailsType";
 
@@ -26,9 +26,9 @@ export * from "./FixtureType";
 
 export * from "./ObjectTemplateType";
 
-export * from "./createWorkspaceEvent";
+export * from "./createOrganizationEvent";
 
-export * from "./listWorkspaceEvents";
+export * from "./listOrganizationEvents";
 
 export * from "./getEventDetails";
 

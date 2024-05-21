@@ -11,7 +11,7 @@ export function listEventObjectTemplates<S>(this: AmbassadorClient | void, event
             id: number & {
                 __serial__?: undefined | true;
             };
-            workspaceId: number;
+            organizationId: number;
             label: string;
             shape: "round" | "rectangle";
             color: string;
@@ -23,10 +23,10 @@ export function listEventObjectTemplates<S>(this: AmbassadorClient | void, event
     limit?: undefined | number;
     offset?: undefined | number;
     sort?: undefined | {
-        field: "length" | "id" | "width" | "color" | "label" | "workspaceId" | "shape";
+        field: "length" | "id" | "width" | "color" | "label" | "organizationId" | "shape";
         direction?: undefined | "ASC" | "DESC";
     } | {
-        field: "length" | "id" | "width" | "color" | "label" | "workspaceId" | "shape";
+        field: "length" | "id" | "width" | "color" | "label" | "organizationId" | "shape";
         direction?: undefined | "ASC" | "DESC";
     }[];
 }): Observable<{
