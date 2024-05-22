@@ -1,7 +1,5 @@
 import type { Reflected } from "@triframe/ambassador";
 
-import type { Observable } from "@triframe/ambassador";
-
 type IAttendeeType = {
     id: number & {
         __serial__?: undefined | true;

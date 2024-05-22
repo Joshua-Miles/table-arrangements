@@ -1,7 +1,8 @@
 import { isAnyFailure } from "@triframe/ambassador";
 import { isLoading, useFormForResult, useResult } from "@triframe/utils-react";
 import { createContext, useContext, useState } from "react";
-import { getEventDetails, listEventObjectTemplates, updateEventDetails } from "../../../api";
+import { getEventDetails, listEventObjectTemplates, updateEventDetails, UserRoles } from "../../../api";
+import { useLoggedInUser } from "../../../_shared";
 import { eventDetailFields, EventDetails, Fixture, isPlacedTable, ObjectTemplate, objectTemplateFields, PlacedTable, Table } from "./fields"
 import { MeasurementSystem } from "./UnitOfMeasure";
 
@@ -48,18 +49,22 @@ class EventEditor {
     private editorState: EditorState
     private setEditorState: (editorState: EditorState) => void
 
+    public isDisabled: boolean;
+
     constructor(
         objectTemplates: ObjectTemplate[],
         eventDetails: EventDetails,
         setEventDetails: (eventDetails: EventDetails) => void,
         editorState: EditorState,
-        setEditorState: (EditorState: EditorState) => void
+        setEditorState: (EditorState: EditorState) => void,
+        isDisabled: boolean
     ) {
         this.objectTemplates = objectTemplates;
         this.eventDetails = eventDetails;
         this.setEventDetails = setEventDetails;
         this.editorState = editorState;
         this.setEditorState = setEditorState;
+        this.isDisabled = isDisabled;
     }
 
     get isAssignmentViewSelected() {
@@ -458,6 +463,8 @@ type EventEditorProviderProps = {
 }
 
 export function EventEditorProvider({ eventId, children }: EventEditorProviderProps) {
+    const loggedInUser = useLoggedInUser();
+
     const objectTemplates = useResult(listEventObjectTemplates, eventId, { select: objectTemplateFields })
 
     const form = useFormForResult(getEventDetails, eventId, { select: eventDetailFields })
@@ -475,8 +482,10 @@ export function EventEditorProvider({ eventId, children }: EventEditorProviderPr
 
     if (isLoading(event) || isAnyFailure(event) || isLoading(objectTemplates) || isAnyFailure(objectTemplates)) return null
 
+    const isDisabled = isLoading(loggedInUser) || !loggedInUser || loggedInUser.role < UserRoles.collaborator;
+
     return (
-        <EventEditorCtx.Provider value={new EventEditor(objectTemplates, event, setEvent, editorState, setEditorState)} >
+        <EventEditorCtx.Provider value={new EventEditor(objectTemplates, event, setEvent, editorState, setEditorState, isDisabled)} >
             {children}
         </EventEditorCtx.Provider>
     )

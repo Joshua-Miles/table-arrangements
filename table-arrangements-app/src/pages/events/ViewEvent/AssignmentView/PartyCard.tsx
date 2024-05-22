@@ -1,5 +1,5 @@
 import { EditIcon } from "@chakra-ui/icons";
-import { Box, BoxProps, Button, Card, CardBody, Flex, IconButton, Tag, TagLabel, Text, VStack } from "@chakra-ui/react";
+import { Box, BoxProps, Button, Card, CardBody, Flex, Tag, TagLabel, Text, VStack } from "@chakra-ui/react";
 import Color from "color";
 import { forwardRef } from "react";
 import { useEventEditor } from "../EventEditor";
@@ -31,10 +31,11 @@ export const PartyCard = forwardRef(({ party, showIndex, onPartySelected, indexO
         {party.attendees.length > 1 &&
           <Text color={Color(party.color).darken(.5).hex()} fontSize="xs" p={1}>{inferPartyName(party)} Party</Text>
         }
-        <Button variant="ghost" leftIcon={<EditIcon />} onMouseDown={() => onPartySelected(party)} size="xs" colorScheme="blue">
-          Edit
-        </Button>
-
+        {!editor.isDisabled &&
+          <Button variant="ghost" leftIcon={<EditIcon />} onMouseDown={() => onPartySelected(party)} size="xs" colorScheme="blue">
+            Edit
+          </Button>
+        }
       </Flex>
       <VStack spacing={1} align="stretch">
         {party.attendees.map( (attendee, index) => {

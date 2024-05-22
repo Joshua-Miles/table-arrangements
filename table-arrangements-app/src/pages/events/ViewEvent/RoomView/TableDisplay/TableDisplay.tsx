@@ -52,6 +52,7 @@ export const TableDisplay = forwardRef(({ table, inOverlay, inline, ...boxProps 
         )
 
     function handleClick() {
+        if (editor.isDisabled) return;
         editor.selectTable(table)
     }
 

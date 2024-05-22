@@ -33,6 +33,7 @@ export const FixtureDisplay = forwardRef(({ fixture, inOverlay, inline, ...boxPr
     const shapeProps = shapePropCreators[shape](fixture);
 
     function handleClick() {
+        if (editor.isDisabled) return;
         editor.selectFixture(fixture)
     }
 

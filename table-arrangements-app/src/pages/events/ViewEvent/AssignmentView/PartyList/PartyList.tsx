@@ -16,7 +16,6 @@ type PartyListProps = BoxProps & {
 }
 
 export function PartyList({ eventId, onPartyAdded, onPartySelected, ...boxProps }: PartyListProps) {
-
     const editor = useEventEditor();
 
     const allParties = editor.getParties();
@@ -60,9 +59,11 @@ export function PartyList({ eventId, onPartyAdded, onPartySelected, ...boxProps 
             <   Input placeholder="Search" value={searchTerm} onChange={e => setSearchTerm(e.target.value)} />
             </Box>
             <Flex justify="flex-end" mb={6}>
-                <Button colorScheme="blue" variant="ghost" size="xs" leftIcon={<AddIcon />} onClick={handleAddParty}>
-                    Add Party
-                </Button>
+                {!editor.isDisabled &&
+                    <Button colorScheme="blue" variant="ghost" size="xs" leftIcon={<AddIcon />} onClick={handleAddParty}>
+                        Add Party
+                    </Button>
+                }
             </Flex>
             <VStack align="stretch" spacing={8}>
                 {searchResults.map( (party, i) => (

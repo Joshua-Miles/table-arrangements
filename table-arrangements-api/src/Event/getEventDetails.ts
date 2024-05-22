@@ -7,7 +7,7 @@ import { EventDetails } from "./EventDetails";
 
 export const getEventDetails = observer(async <S>({ observe }: ObserverContext, client: Client<Session>, eventId: number, options: GetOptions<typeof EventDetails, S>) => {
     const { loggedInUserId } = await client.getSession();
-    const failure = await assertUserHasRoleOnEvent(eventId, loggedInUserId, UserRoles.collaborator);
+    const failure = await assertUserHasRoleOnEvent(eventId, loggedInUserId, UserRoles.user);
     if (failure) return failure;
 
     return await observe(EventDetails.withId(eventId).get(options));

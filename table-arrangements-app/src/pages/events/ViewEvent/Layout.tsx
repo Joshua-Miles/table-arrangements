@@ -1,6 +1,6 @@
-import { ArrowBackIcon, ChevronLeftIcon } from "@chakra-ui/icons";
+import { ChevronLeftIcon } from "@chakra-ui/icons";
 import { Button, ButtonGroup, Flex, IconButton, Text } from "@chakra-ui/react";
-import { NavBar, NavBarIconButton, NavBarText } from "../../../_shared";
+import { NavBar, NavBarEnd, NavBarIconButton, NavBarProfileControl, NavBarText } from "../../../_shared";
 import { AssignmentView } from "./AssignmentView";
 import { useEventEditor } from "./EventEditor";
 import { RoomView } from "./RoomView";
@@ -17,6 +17,9 @@ export function Layout() {
                     to={`/organizations/${editor.getOrganizationId()}`}
                 />
                 <NavBarText>{editor.getEventName()}</NavBarText>
+                <NavBarEnd>
+                    <NavBarProfileControl />
+                </NavBarEnd>
             </NavBar>
             <Flex flex={1} direction="column" overflow="hidden">
                 {editor.isAssignmentViewSelected && <AssignmentView />}

@@ -7,6 +7,10 @@ import { Login } from "./pages/Login";
 import { Homepage } from "./pages/Homepage";
 import { ViewEvent } from "./pages/events/ViewEvent";
 import { ViewOrganization } from "./pages/organizations/ViewOrganization";
+import { EditOrganization } from "./pages/organizations/EditOrganization";
+import { CreateOrganizationUser } from "./pages/organizations/users/CreateOrganizationUser";
+import { EditOrganizationUser } from "./pages/organizations/users/EditOrganizationUser";
+import { EditProfile } from "./pages/profile/EditProfile";
 
 Object.assign(window, ApiInterface);
 
@@ -24,8 +28,24 @@ const router = createBrowserRouter([
     element: <Login />
   },
   {
+    path: "/profile/edit",
+    element: <EditProfile />
+  },
+  {
     path: "/organizations/:organizationId",
     element: <ViewOrganization />
+  },
+  {
+    path: "/organizations/:organizationId/edit",
+    element: <EditOrganization />
+  },
+  {
+    path: "/organizations/:organizationId/users/new",
+    element: <CreateOrganizationUser />
+  },
+  {
+    path: "/organizations/:organizationId/users/:userId/edit",
+    element: <EditOrganizationUser />
   },
   {
     path: "/events/:eventId",

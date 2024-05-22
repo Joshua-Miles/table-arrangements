@@ -6,6 +6,7 @@ import { Session } from '../Session';
 import { login } from './login';
 import { Users } from './User';
 import { UserRoles } from './UserRoles';
+import { validateCreateUserOptions } from './validateCreateUserOptions';
 import { validateLoginOrSignupOptions } from './validateLoginOrSignupOptions';
 
 type SignUpOptions = {
@@ -17,7 +18,7 @@ type SignUpOptions = {
 }
 
 export async function signUp(client: Client<Session>, options: SignUpOptions) {
-    const error = validateSignupOptions(options);
+    const error = validateCreateUserOptions(options);
     if (error) return error;
 
     const { email, password, firstName, lastName, organizationName } = options;
@@ -44,13 +45,4 @@ export async function signUp(client: Client<Session>, options: SignUpOptions) {
     await login(client, options);
 
     return user.id;
-}
-
-function validateSignupOptions(options: SignUpOptions) {
-    const error = validateLoginOrSignupOptions(options)
-    if (error) return error;
-
-    if (!options.firstName) return makeFailure('firstNameIsEmpty', {})
-    if (!options.firstName) return makeFailure('lastNameIsEmpty', {})
-    return false;
 }

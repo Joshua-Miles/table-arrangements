@@ -1,7 +1,5 @@
 import type { Reflected } from "@triframe/ambassador";
 
-import type { Observable } from "@triframe/ambassador";
-
 type ITableType = {
     id: number & {
         __serial__?: undefined | true;

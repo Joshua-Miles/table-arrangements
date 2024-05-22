@@ -38,22 +38,26 @@ export function Table({ table, parties, onPartySelected }: TableProps) {
             </Box>
             <CardBody>
                 <Flex justifyContent="space-between">
-                    {!isEditingTableLabel
-                        ?<Button variant="ghost" colorScheme="blue" size="sm" onClick={() => setIsEditingTableLabel(true)}>
+                    {editor.isDisabled ? (
+                        <Text>{inferTableName(table, editor.getParties())} Table</Text>
+                    )
+                    : !isEditingTableLabel ? (
+                        <Button variant="ghost" colorScheme="blue" size="sm" onClick={() => setIsEditingTableLabel(true)}>
                             {inferTableName(table, editor.getParties())} Table
                         </Button>
-                        : <InputGroup size="sm" width={200}>
-                            <Input
-                                type="text"
-                                autoFocus
-                                placeholder={inferTableName(table, editor.getParties())}
-                                defaultValue={table.label ?? ''}
-                                onBlur={handleTableLabelInputBlur}
-                            />
-                            <InputRightAddon>
-                                Table
-                            </InputRightAddon>
-                        </InputGroup>
+                    )
+                    : <InputGroup size="sm" width={200}>
+                        <Input
+                            type="text"
+                            autoFocus
+                            placeholder={inferTableName(table, editor.getParties())}
+                            defaultValue={table.label ?? ''}
+                            onBlur={handleTableLabelInputBlur}
+                        />
+                        <InputRightAddon>
+                            Table
+                        </InputRightAddon>
+                    </InputGroup>
                     }
                     <Text color="gray.500">{totalAttendees} / {table.capacity}</Text>
                 </Flex>

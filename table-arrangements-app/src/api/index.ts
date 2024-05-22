@@ -1,5 +1,13 @@
 export * from "./getLoggedInUser";
 
+export * from "./listOrganizationUsers";
+
+export * from "./getOrganizationUser";
+
+export * from "./createOrganizationUser";
+
+export * from "./updateOrganizationUser";
+
 export * from "./login";
 
 export * from "./logout";
@@ -10,7 +18,11 @@ export * from "./UserType";
 
 export * from "./UserWithOrganizationType";
 
+export * from "./UserRoles";
+
 export * from "./getOrganization";
+
+export * from "./updateOrganization";
 
 export * from "./OrganizationType";
 

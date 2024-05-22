@@ -1,5 +1,5 @@
-import { ArrowBackIcon } from "@chakra-ui/icons";
-import { Button, Card, CardBody, Flex, IconButton } from "@chakra-ui/react";
+import { CloseIcon } from "@chakra-ui/icons";
+import { Card, Flex, IconButton } from "@chakra-ui/react";
 import { useEventEditor } from "../../EventEditor";
 import { DefaultPanel } from "./DefaultPanel";
 import { SelectedFixturePanel } from "./SelectedFixturePanel";
@@ -22,7 +22,7 @@ export function Sidebar() {
                 <Flex>
                     <IconButton
                         aria-label="Back"
-                        icon={<ArrowBackIcon />}
+                        icon={<CloseIcon />}
                         variant="ghost"
                         size="lg"
                         onClick={() => editor.clearSelection()}

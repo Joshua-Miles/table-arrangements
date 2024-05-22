@@ -25,74 +25,106 @@ export function DefaultPanel() {
 
     const tableResults = placedTables.filter( table => inferTableName(table, editor.getParties()).toLowerCase().includes(searchTerm.toLowerCase()))
 
+    const unplacedTableResults = unplacedTables.filter( table => inferTableName(table, editor.getParties()).toLowerCase().includes(searchTerm.toLowerCase()))
+
+
     return (
         <VStack align="stretch" spacing={10}>
             <Box  p={2}>
                 <Input placeholder="Search" value={searchTerm} onChange={e => setSearchTerm(e.target.value)} />
                 <Flex justify="flex-end">
-                    <Menu placement="end">
-                        <MenuButton
-                            as={Button}
-                            colorScheme="blue"
-                            variant="ghost"
-                            aria-label="Add Fixture"
-                            leftIcon={<AddIcon /> }
-                            size="xs"
-                        >
-                            Add Fixture
-                        </MenuButton>
-                        <Portal>
-                            <MenuList>
-                                <MenuItem icon={<Icon as={BiSquare} />} onClick={() => editor.initiateAddingObject('rectangle')}>
-                                    Rectangle
-                                </MenuItem>
-                                <MenuItem icon={<Icon as={BiCircle} />} onClick={() => editor.initiateAddingObject('round')}>
-                                    Oval
-                                </MenuItem>
-                            </MenuList>
-                        </Portal>
-                    </Menu>
+                    {!editor.isDisabled &&
+                        <Menu placement="end">
+                            <MenuButton
+                                as={Button}
+                                colorScheme="blue"
+                                variant="ghost"
+                                aria-label="Add Fixture"
+                                leftIcon={<AddIcon /> }
+                                size="xs"
+                            >
+                                Add Fixture
+                            </MenuButton>
+                            <Portal>
+                                <MenuList>
+                                    <MenuItem icon={<Icon as={BiSquare} />} onClick={() => editor.initiateAddingObject('rectangle')}>
+                                        Rectangle
+                                    </MenuItem>
+                                    <MenuItem icon={<Icon as={BiCircle} />} onClick={() => editor.initiateAddingObject('round')}>
+                                        Oval
+                                    </MenuItem>
+                                </MenuList>
+                            </Portal>
+                        </Menu>
+                    }
                 </Flex>
             </Box>
-            {unplacedTables.map( table => (
-                <Center>
-                    <DraggableTableDisplay
-                        table={{
-                            ...table,
-                            shape,
-                            color,
-                            width,
-                            length
-                        }}
-                    />
-                </Center>
-            ))}
-             <VStack align="stretch" spacing={0}>
-                {fixtureResults.map( fixture => (
-                    <PanelButton onClick={() => editor.selectFixture(fixture)}>
-                        <Text>{fixture.label || 'Unnamed'}</Text>
-                        <FixtureDisplay inline fixture={scale(fixture, editor.scale)} />
-                    </PanelButton>
-                ))}
-                {tableResults.map( table => (
-                    <PanelButton onClick={() => editor.selectTable(table)}>
-                        <Text>{inferTableName(table, editor.getParties())}</Text>
-                        <TableDisplay inline table={scale(table, editor.scale)} />
-                    </PanelButton>
-                ))}
-            </VStack>
+            <Box>
+                {unplacedTableResults.length
+                    ? <Text color="gray.500" fontSize="xs" ml={2}>Unplaced Tables</Text>
+                    : null
+                }
+                <VStack spacing={10}>
+                    {unplacedTableResults.map( table => (
+                        <Center>
+                            <DraggableTableDisplay
+                                table={{
+                                    ...table,
+                                    shape,
+                                    color,
+                                    width,
+                                    length
+                                }}
+                            />
+                        </Center>
+                    ))}
+                </VStack>
+            </Box>
+            <Box>
+                {(fixtureResults.length || tableResults.length)
+                    ? <Text color="gray.500" fontSize="xs" ml={2}>Fixtures & Tables</Text>
+                    : null
+                }
+                <VStack align="stretch" spacing={0}>
+                    {fixtureResults.map( fixture => (
+                        <PanelButton onClick={() => editor.selectFixture(fixture)}>
+                            <Text>{fixture.label || 'Unnamed'}</Text>
+                            <FixtureDisplay inline fixture={scale(fixture, editor.scale)} />
+                        </PanelButton>
+                    ))}
+                    {tableResults.map( table => (
+                        <PanelButton onClick={() => editor.selectTable(table)}>
+                            <Text>{inferTableName(table, editor.getParties())}</Text>
+                            <TableDisplay inline table={scale(table, editor.scale)} />
+                        </PanelButton>
+                    ))}
+                </VStack>
+            </Box>
+            {[fixtureResults.length, tableResults.length, unplacedTableResults.length ].every( count => count === 0)
+                ?  <Center><Text>No objects match search "{searchTerm}"</Text></Center>
+                : null
+            }
         </VStack>
     )
 }
 
 function PanelButton(props: FlexProps) {
+    const editor = useEventEditor();
+
+    if (editor.isDisabled) {
+        props = {
+            ...props,
+            onClick: undefined
+        }
+    }
+
     return <Flex
         justify="space-between"
         align="center"
         p={4}
         h={'100px'}
-        cursor="pointer"
-        _hover={{ backgroundColor: 'gray.100'}}
+        cursor={editor.isDisabled ? undefined : "pointer"}
+        _hover={editor.isDisabled ? undefined : { backgroundColor: 'gray.100'}}
         {...props}
     />
 }

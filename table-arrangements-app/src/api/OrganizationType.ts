@@ -1,7 +1,5 @@
 import type { Reflected } from "@triframe/ambassador";
 
-import type { Observable } from "@triframe/ambassador";
-
 type IOrganizationType = {
     id: number & {
         __serial__?: undefined | true;
