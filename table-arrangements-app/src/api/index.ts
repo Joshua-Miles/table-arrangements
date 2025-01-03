@@ -28,6 +28,8 @@ export * from "./OrganizationType";
 
 export * from "./EventDetailsType";
 
+export * from "./EventRegistrationInfoType";
+
 export * from "./EventType";
 
 export * from "./AttendeeType";
@@ -49,3 +51,5 @@ export * from "./updateEventDetails";
 export * from "./createEventTag";
 
 export * from "./listEventObjectTemplates";
+
+export * from "./getEventRegistrationInfo";

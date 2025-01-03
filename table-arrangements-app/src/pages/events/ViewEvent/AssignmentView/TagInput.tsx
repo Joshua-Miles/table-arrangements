@@ -1,4 +1,4 @@
-import { EventTag } from "../fields";
+import { EventTag } from "../../_shared/fields";
 import {
   Popover,
   PopoverTrigger,

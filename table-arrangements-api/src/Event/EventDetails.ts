@@ -3,6 +3,7 @@ import { Attendees } from "./Attendee";
 import { Events } from "./Event";
 import { Fixtures } from "./Fixture";
 import { Parties } from "./Party";
+import { CustomFields } from "./CustomField";
 import { Tables } from "./Table";
 import { Tags } from "./Tags";
 
@@ -17,6 +18,9 @@ export const EventDetails = Events.map( event => ({
     fixtures: Fixtures.withEventId(event.id)
         .omit('eventId')
         .strategyForAssociationRemoval(AssociationRemovalStrategies.Delete),
+    customFields: CustomFields.withEventId(event.id)
+        .omit('eventId')
+        .strategyForAssociationRemoval(AssociationRemovalStrategies.Delete),
     parties: Parties.withEventId(event.id)
         .omit('eventId')
         .map( party => ({
@@ -25,5 +29,5 @@ export const EventDetails = Events.map( event => ({
                 .omit('partyId')
                 .strategyForAssociationRemoval(AssociationRemovalStrategies.Delete),
         }))
-        .strategyForAssociationRemoval(AssociationRemovalStrategies.Delete)
+        .strategyForAssociationRemoval(AssociationRemovalStrategies.Delete),
 }))

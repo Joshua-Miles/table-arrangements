@@ -11,6 +11,8 @@ import { EditOrganization } from "./pages/organizations/EditOrganization";
 import { CreateOrganizationUser } from "./pages/organizations/users/CreateOrganizationUser";
 import { EditOrganizationUser } from "./pages/organizations/users/EditOrganizationUser";
 import { EditProfile } from "./pages/profile/EditProfile";
+import { ViewEventSettings } from "./pages/events/ViewEventSettings";
+import { Register } from "./pages/register/Register";
 
 Object.assign(window, ApiInterface);
 
@@ -50,6 +52,18 @@ const router = createBrowserRouter([
   {
     path: "/events/:eventId",
     element: <ViewEvent />
+  },
+  {
+    path: "/events/:eventId/settings",
+    element: <ViewEventSettings />
+  },
+  {
+    path: "/register/:publicRegistrationKey",
+    element: <Register />
+  },
+  {
+    path: "/*",
+    element: <Navigate to="/" />
   }
 ]);
 

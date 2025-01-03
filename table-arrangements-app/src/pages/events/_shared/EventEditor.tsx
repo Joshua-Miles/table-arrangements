@@ -1,8 +1,9 @@
 import { isAnyFailure } from "@triframe/ambassador";
 import { isLoading, useFormForResult, useResult } from "@triframe/utils-react";
 import { createContext, useContext, useState } from "react";
+import { CustomField } from ".";
 import { getEventDetails, listEventObjectTemplates, updateEventDetails, UserRoles } from "../../../api";
-import { useLoggedInUser } from "../../../_shared";
+import { NavBar, NavBarEnd, NavBarProfileControl, useLoggedInUser } from "../../../_shared";
 import { eventDetailFields, EventDetails, Fixture, isPlacedTable, ObjectTemplate, objectTemplateFields, PlacedTable, Table } from "./fields"
 import { MeasurementSystem } from "./UnitOfMeasure";
 
@@ -92,6 +93,16 @@ class EventEditor {
 
     get shouldShowGridlines() {
         return this.editorState.shouldShowGridlines;
+    }
+
+    get isPublicRegistrationEnabled() {
+        return this.eventDetails.isPublicRegistrationEnabled;
+    }
+
+    get publicRegistrationUrl() {
+        const url = new URL(window.location.toString());
+        url.pathname = `/register/${this.eventDetails.publicRegistrationKey}`
+        return url.toString();
     }
 
     setView(view: EditorState['view']) {
@@ -289,6 +300,26 @@ class EventEditor {
         })
     }
 
+    addCustomField(newField: CustomField) {
+        this.setEventDetails({
+            ...this.eventDetails,
+            customFields: [
+                ...this.eventDetails.customFields,
+                newField
+            ]
+        })
+    }
+
+    updateCustomField(customFieldId: number, values: Partial<CustomField>) {
+        this.setEventDetails({
+            ...this.eventDetails,
+            customFields: this.eventDetails.customFields.map( customField => customField.id === customFieldId
+                ? { ...customField, ...values }
+                : customField
+            )
+        })
+    }
+
     deleteFixture(fixtureToDelete: Fixture) {
         if (this.isFixtureSelected(fixtureToDelete)) {
             this.clearSelection();
@@ -363,6 +394,10 @@ class EventEditor {
 
     getFixtures(): Fixture[] {
         return this.eventDetails.fixtures;
+    }
+
+    getCustomFields(scope: 'party' | 'attendee') {
+        return this.eventDetails.customFields.filter( field => field.scope === scope);
     }
 
     getTable(tableId: number): Table {
@@ -480,7 +515,13 @@ export function EventEditorProvider({ eventId, children }: EventEditorProviderPr
 
     const [ editorState, setEditorState ] = useState<EditorState>(defaultEditorState);
 
-    if (isLoading(event) || isAnyFailure(event) || isLoading(objectTemplates) || isAnyFailure(objectTemplates)) return null
+    if (isLoading(event) || isAnyFailure(event) || isLoading(objectTemplates) || isAnyFailure(objectTemplates)) return (
+        <NavBar>
+            <NavBarEnd>
+                <NavBarProfileControl />
+            </NavBarEnd>
+        </NavBar>
+    )
 
     const isDisabled = isLoading(loggedInUser) || !loggedInUser || loggedInUser.role < UserRoles.collaborator;
 

@@ -1,6 +1,6 @@
 import { CloseIcon } from "@chakra-ui/icons";
 import { Card, Flex, IconButton } from "@chakra-ui/react";
-import { useEventEditor } from "../../EventEditor";
+import { useEventEditor } from "../../../_shared/EventEditor";
 import { DefaultPanel } from "./DefaultPanel";
 import { SelectedFixturePanel } from "./SelectedFixturePanel";
 import { SelectedTablePanel } from "./SelectedTablePanel";

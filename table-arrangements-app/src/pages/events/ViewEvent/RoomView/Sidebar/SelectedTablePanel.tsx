@@ -1,6 +1,6 @@
 import { Card, CardBody, FormControl, FormLabel, Heading, HStack, Input, VStack } from "@chakra-ui/react";
-import { useEventEditor } from "../../EventEditor";
-import { Table } from "../../fields";
+import { useEventEditor } from "../../../_shared/EventEditor";
+import { Table } from "../../../_shared/fields";
 import { inferTableName } from "../../inferTableLabel";
 import { MeasurementInput } from "../MeasurementInput";
 

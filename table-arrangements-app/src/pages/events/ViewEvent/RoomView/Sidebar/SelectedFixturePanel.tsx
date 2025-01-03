@@ -1,7 +1,7 @@
 import { DeleteIcon } from "@chakra-ui/icons";
 import { Button, CardBody, FormControl, FormLabel, Input, VStack } from "@chakra-ui/react";
-import { useEventEditor } from "../../EventEditor";
-import { Fixture } from "../../fields";
+import { useEventEditor } from "../../../_shared/EventEditor";
+import { Fixture } from "../../../_shared/fields";
 import { MeasurementInput } from "../MeasurementInput";
 
 type SelectedFixturePanelProps = {

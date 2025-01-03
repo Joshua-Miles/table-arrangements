@@ -1,4 +1,20 @@
 {
+    "mason-test": {
+        "app": {
+            "type": "app.shared",
+            "name": "journal-api",
+            "codebase": ".",
+            "ports": [
+                "journal-api-web"
+            ],
+            "env": {
+                "SESSION_SECRET": "christfirstcoderchristfirstcoder",
+                "DATABASE_URL": "{{process.env.DATABASE_URL}}",
+                "API_PORT": "{{process.env.API_PORT}}",
+                "SUPER_USER_SECRET": "{{process.env.SUPER_USER_SECRET}}"
+            }
+        }
+    },
     "production": {
         "storage": {
             "type": "file_store",

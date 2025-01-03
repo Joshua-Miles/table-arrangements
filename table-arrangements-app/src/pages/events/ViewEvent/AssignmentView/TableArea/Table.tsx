@@ -1,10 +1,10 @@
 import { Alert, AlertDescription, AlertIcon, AlertTitle, Avatar, Box, Button, Card, CardBody, Flex, Input, InputGroup, InputRightAddon, Text, VStack } from "@chakra-ui/react";
 import { Fragment, useState, FocusEvent} from "react";
 import { DraggablePartyCard } from "../DraggablePartCard";
-import { Party, Table } from "../../fields";
+import { Party, Table } from "../../../_shared/fields";
 import { DropTarget } from "./DropTarget";
 import { inferTableName } from "../../inferTableLabel";
-import { useEventEditor } from "../../EventEditor";
+import { useEventEditor } from "../../../_shared/EventEditor";
 
 type TableProps = {
     table: Table,

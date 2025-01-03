@@ -1,8 +1,8 @@
 import { Box, Center, Text } from "@chakra-ui/react";
 import { useDroppable } from "@dnd-kit/core";
 import { useEffect, useRef } from "react";
-import { useEventEditor } from "../EventEditor";
-import { format } from "../UnitOfMeasure";
+import { useEventEditor } from "../../_shared/EventEditor";
+import { format } from "../../_shared/UnitOfMeasure";
 
 type Props = {
     children: any

@@ -1,8 +1,8 @@
 import { SettingsIcon } from "@chakra-ui/icons";
 import { Button, Card, CardBody, CardFooter, CardHeader, Center, FormControl, FormLabel, HStack, Select, VStack } from "@chakra-ui/react";
 import { useState } from "react";
-import { useEventEditor } from "../EventEditor";
-import { EventDetails } from "../fields";
+import { useEventEditor } from "../../_shared/EventEditor";
+import { EventDetails } from "../../_shared/fields";
 import { formatFixtureLabel } from "./formatFixtureLabel";
 import { MeasurementInput } from "./MeasurementInput";
 

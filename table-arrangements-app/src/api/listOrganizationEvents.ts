@@ -16,16 +16,18 @@ export function listOrganizationEvents<S>(this: AmbassadorClient | void, organiz
             roomWidth: null | number;
             roomLength: null | number;
             defaultTableObjectTemplateId: null | number;
+            isPublicRegistrationEnabled: boolean;
+            publicRegistrationKey: string;
         };
         ᑕ_subset: S;
     };
     limit?: undefined | number;
     offset?: undefined | number;
     sort?: undefined | {
-        field: "id" | "name" | "organizationId" | "roomWidth" | "roomLength" | "defaultTableObjectTemplateId";
+        field: "id" | "name" | "organizationId" | "roomWidth" | "roomLength" | "defaultTableObjectTemplateId" | "isPublicRegistrationEnabled" | "publicRegistrationKey";
         direction?: undefined | "ASC" | "DESC";
     } | {
-        field: "id" | "name" | "organizationId" | "roomWidth" | "roomLength" | "defaultTableObjectTemplateId";
+        field: "id" | "name" | "organizationId" | "roomWidth" | "roomLength" | "defaultTableObjectTemplateId" | "isPublicRegistrationEnabled" | "publicRegistrationKey";
         direction?: undefined | "ASC" | "DESC";
     }[];
 }): Observable<{

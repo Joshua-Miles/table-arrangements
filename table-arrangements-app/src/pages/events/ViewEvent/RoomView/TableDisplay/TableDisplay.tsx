@@ -1,8 +1,8 @@
 import { Box, BoxProps, List, ListItem, OrderedList, Text, Tooltip, UnorderedList } from "@chakra-ui/react";
 import Color from "color";
 import { forwardRef, useState } from "react";
-import { useEventEditor } from "../../EventEditor";
-import { Attendee, ObjectTemplate, Table } from "../../fields";
+import { useEventEditor } from "../../../_shared/EventEditor";
+import { Attendee, ObjectTemplate, Table } from "../../../_shared/fields";
 import { inferTableName } from "../../inferTableLabel";
 
 

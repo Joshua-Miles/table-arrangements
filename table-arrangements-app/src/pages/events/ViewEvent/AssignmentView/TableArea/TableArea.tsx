@@ -1,5 +1,5 @@
 import { Box, BoxProps, SimpleGrid } from "@chakra-ui/react";
-import { EventDetails, Party } from "../../fields";
+import { EventDetails, Party } from "../../../_shared/fields";
 import { Table } from "./Table";
 
 type TableAreaProps = BoxProps & {

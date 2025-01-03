@@ -19,6 +19,8 @@ export function createOrganizationEvent(this: AmbassadorClient | void, organizat
     roomWidth: null | number;
     roomLength: null | number;
     defaultTableObjectTemplateId: null | number;
+    isPublicRegistrationEnabled: boolean;
+    publicRegistrationKey: string;
 }> {
     let api = AmbassadorClient.get(this, process.env.API_URL as string);
     return api.callRemoteFunction("createOrganizationEvent", organizationId, options);

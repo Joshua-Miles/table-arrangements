@@ -2,8 +2,8 @@ import { EditIcon } from "@chakra-ui/icons";
 import { Box, BoxProps, Button, Card, CardBody, Flex, Tag, TagLabel, Text, VStack } from "@chakra-ui/react";
 import Color from "color";
 import { forwardRef } from "react";
-import { useEventEditor } from "../EventEditor";
-import { Party } from "../fields";
+import { useEventEditor } from "../../_shared/EventEditor";
+import { Party } from "../../_shared/fields";
 import { inferPartyName } from "../inferPartyName";
 
 export type PartyCardProps = BoxProps & {

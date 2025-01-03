@@ -2,7 +2,7 @@ import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import { Box, Button, ButtonGroup, Checkbox, Flex, HStack, Icon, IconButton, Menu, MenuButton, MenuItem, MenuList, Text } from "@chakra-ui/react";
 import { DndContext, DragEndEvent, DragOverlay, DragStartEvent, MouseSensor, useSensor } from "@dnd-kit/core";
 import { useState } from "react";
-import { useEventEditor } from "../EventEditor"
+import { useEventEditor } from "../../_shared/EventEditor"
 import { Gridlines } from "./Gridlines";
 import { RequiredSettingsForm } from "./RequiredSettingsForm";
 import { RoomDisplay } from "./RoomDisplay";
@@ -10,7 +10,7 @@ import { DraggableTableDisplay, TableDisplay, TableWithObjectTemplate } from "./
 import { Sidebar } from "./Sidebar";
 import { DraggableFixtureDisplay, FixtureDisplay } from "./FixtureDisplay";
 import { FixtureBeingAdded } from "./FixtureDisplay/FixtureBeingAdded";
-import { Fixture, isPlacedTable } from "../fields";
+import { Fixture, isPlacedTable } from "../../_shared/fields";
 
 type DragState = { type: 'table', table: TableWithObjectTemplate } | { type: 'fixture', fixture: Fixture }
 

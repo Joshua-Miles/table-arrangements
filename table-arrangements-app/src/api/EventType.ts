@@ -9,6 +9,8 @@ type IEventType = {
     roomWidth: null | number;
     roomLength: null | number;
     defaultTableObjectTemplateId: null | number;
+    isPublicRegistrationEnabled: boolean;
+    publicRegistrationKey: string;
 };
 
 export const EventType = {
@@ -85,6 +87,14 @@ export const EventType = {
                     kind: "number" as const,
                     __isReflected: true as const
                 }] as const
+        } as const,
+        isPublicRegistrationEnabled: {
+            kind: "boolean" as const,
+            __isReflected: true as const
+        } as const,
+        publicRegistrationKey: {
+            kind: "string" as const,
+            __isReflected: true as const
         } as const
     } as const
 } as unknown as Reflected<IEventType>;

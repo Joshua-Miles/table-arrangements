@@ -7,6 +7,8 @@ export type Event = {
     roomWidth: number | null
     roomLength: number | null
     defaultTableObjectTemplateId: number | null
+    isPublicRegistrationEnabled: boolean
+    publicRegistrationKey: string
 }
 
 export const Events = persist<Event>()

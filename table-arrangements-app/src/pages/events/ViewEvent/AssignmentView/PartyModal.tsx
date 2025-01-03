@@ -1,4 +1,4 @@
-import { Attendee, Party } from "../fields";
+import { Attendee, Party } from "../../_shared/fields";
 import {
     Modal,
     ModalOverlay,
@@ -21,7 +21,7 @@ import {
 import { useState, KeyboardEvent, useRef, useEffect } from "react";
 import { AddIcon, DeleteIcon } from "@chakra-ui/icons";
 import { inferPartyName } from "../inferPartyName";
-import { useEventEditor } from "../EventEditor";
+import { useEventEditor } from "../../_shared/EventEditor";
 import { TagInput } from "./TagInput";
 
 export type PartyModalProps = {

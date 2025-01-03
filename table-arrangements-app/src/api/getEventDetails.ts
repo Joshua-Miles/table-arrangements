@@ -42,6 +42,18 @@ export function getEventDetails<S>(this: AmbassadorClient | void, eventId: numbe
                 y: number;
                 shape: "round" | "rectangle";
             }[];
+            customFields: {
+                type: "text" | "email" | "phone";
+                id: number & {
+                    __serial__?: undefined | true;
+                };
+                name: string;
+                prompt: string;
+                scope: "party" | "attendee";
+                orderby: number;
+                placeholder: string;
+                isRequired: boolean;
+            }[];
             parties: {
                 attendees: {
                     id: number & {
@@ -66,6 +78,8 @@ export function getEventDetails<S>(this: AmbassadorClient | void, eventId: numbe
             roomWidth: null | number;
             roomLength: null | number;
             defaultTableObjectTemplateId: null | number;
+            isPublicRegistrationEnabled: boolean;
+            publicRegistrationKey: string;
         };
         ᑕ_subset: S;
     };

@@ -1,10 +1,10 @@
 import { AddIcon } from "@chakra-ui/icons";
 import { Box, Button, Center, Flex, FlexProps, Icon, Input, Menu, MenuButton, MenuItem, MenuList, Portal, Text, VStack } from "@chakra-ui/react";
-import { useEventEditor } from "../../EventEditor";
+import { useEventEditor } from "../../../_shared/EventEditor";
 import { DraggableTableDisplay, TableDisplay } from "../TableDisplay";
 import { BiSquare, BiCircle } from 'react-icons/bi'
 import { FixtureDisplay } from "../FixtureDisplay";
-import { Fixture, PlacedTable } from "../../fields";
+import { Fixture, PlacedTable } from "../../../_shared/fields";
 import { inferTableName } from "../../inferTableLabel";
 import { useState } from "react";
 

@@ -1,7 +1,7 @@
 import { Box, BoxProps, Tooltip } from "@chakra-ui/react";
 import { forwardRef } from "react";
-import { useEventEditor } from "../../EventEditor";
-import { Fixture, ObjectTemplate } from "../../fields";
+import { useEventEditor } from "../../../_shared/EventEditor";
+import { Fixture, ObjectTemplate } from "../../../_shared/fields";
 
 
 export type FixtureDisplayProps = BoxProps & {

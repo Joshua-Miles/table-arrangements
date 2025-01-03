@@ -1,7 +1,7 @@
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { Button, Input, InputGroup, InputGroupProps, InputProps, InputRightAddon, Menu, MenuButton, MenuItem, MenuList, Portal } from "@chakra-ui/react";
 import { ChangeEvent, useState } from "react";
-import { convert, getAbbreviationFor, UnitOfMeasure, UnitsOfMeasure } from "../UnitOfMeasure";
+import { convert, getAbbreviationFor, UnitOfMeasure, UnitsOfMeasure } from "../../_shared/UnitOfMeasure";
 
 export type MeasurementInputProps = Omit<InputGroupProps, 'onChange'> & Pick<InputProps, 'placeholder'> & {
     value?: number | null

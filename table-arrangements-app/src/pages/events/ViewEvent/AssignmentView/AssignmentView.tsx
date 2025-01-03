@@ -8,9 +8,9 @@ import { getEventDetails, updateEventDetails } from "../../../../api";
 import { PartyCard } from "./PartyCard";
 import { PartyList } from "./PartyList";
 import { TableArea } from "./TableArea/TableArea";
-import { eventDetailFields, Party } from '../fields';
+import { eventDetailFields, Party } from '../../_shared/fields';
 import { PartyModal } from './PartyModal';
-import { EventEditorProvider, useEventEditor } from '../EventEditor';
+import { EventEditorProvider, useEventEditor } from '../../_shared/EventEditor';
 
 
 export function AssignmentView () {

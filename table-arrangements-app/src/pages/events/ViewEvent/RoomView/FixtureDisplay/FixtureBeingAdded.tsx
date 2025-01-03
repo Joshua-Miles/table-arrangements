@@ -1,5 +1,5 @@
 import { FixtureDisplay } from ".";
-import { useEventEditor } from "../../EventEditor";
+import { useEventEditor } from "../../../_shared/EventEditor";
 
 export function FixtureBeingAdded() {
     const editor = useEventEditor();

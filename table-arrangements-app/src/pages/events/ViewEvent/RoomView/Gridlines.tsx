@@ -1,7 +1,7 @@
 import { useEvent } from "@dnd-kit/utilities";
 import { MouseEvent as ReactMouseEvent, useEffect, useRef } from "react"
-import { useEventEditor } from "../EventEditor";
-import { convert } from "../UnitOfMeasure";
+import { useEventEditor } from "../../_shared/EventEditor";
+import { convert } from "../../_shared/UnitOfMeasure";
 
 type PanAnchor = {
     x: number | null,

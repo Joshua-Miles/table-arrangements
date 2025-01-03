@@ -1,4 +1,4 @@
-import { Attendee, Party, Table } from "./fields";
+import { Attendee, Party, Table } from "../_shared/fields";
 import { inferPartyName } from "./inferPartyName";
 
 export function inferTableName(table: Table, parties: Party[]) {

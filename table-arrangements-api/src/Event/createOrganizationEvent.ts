@@ -21,7 +21,9 @@ export async function createOrganizationEvent(client: Client<Session>, organizat
     const authorizationFailure = await assertUserHasRole(loggedInUserId, organizationId, UserRoles.collaborator);
     if (authorizationFailure) return authorizationFailure;
 
-    const event = await Events.append({ organizationId, name })
+    const publicRegistrationKey = generatePublicRegistrationKey(20);
+
+    const event = await Events.append({ organizationId, name, publicRegistrationKey, isPublicRegistrationEnabled: false })
 
     if (numberOfTables && tableCapacity) {
         await Tables.appendMany(new Array(numberOfTables).fill(null).map( (_, index) => ({
@@ -33,4 +35,16 @@ export async function createOrganizationEvent(client: Client<Session>, organizat
     }
 
     return event;
+}
+
+function generatePublicRegistrationKey(length: number) {
+    let result = '';
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const charactersLength = characters.length;
+    let counter = 0;
+    while (counter < length) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+      counter += 1;
+    }
+    return result;
 }

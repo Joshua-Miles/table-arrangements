@@ -1,5 +1,5 @@
 import { useDraggable } from "@dnd-kit/core";
-import { useEventEditor } from "../EventEditor";
+import { useEventEditor } from "../../_shared/EventEditor";
 import { PartyCard, PartyCardProps } from "./PartyCard";
 
 export function DraggablePartyCard(props: PartyCardProps) {

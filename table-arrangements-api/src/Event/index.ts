@@ -11,10 +11,13 @@ import { updateEventDetails } from "./updateEventDetails"
 import { createEventTag } from "./createEventTag"
 import { listEventObjectTemplates } from "./listEventObjectTemplates"
 import { ObjectTemplates } from "../Organization"
+import { getEventRegistrationInfo } from './getEventRegistrationInfo'
+import { EventRegistrationInfo } from "./EventRegistrationInfo"
 
 
 export const PublicEventInterface = {
     EventDetailsType: EventDetails.type,
+    EventRegistrationInfoType: EventRegistrationInfo.type,
     EventType: Events.type,
     AttendeeType: Attendees.type,
     TableType: Tables.type,
@@ -26,5 +29,6 @@ export const PublicEventInterface = {
     getEventDetails,
     updateEventDetails,
     createEventTag,
-    listEventObjectTemplates
+    listEventObjectTemplates,
+    getEventRegistrationInfo
 }

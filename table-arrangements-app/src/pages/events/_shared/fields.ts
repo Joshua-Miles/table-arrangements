@@ -9,6 +9,8 @@ export const eventDetailFields = (
         .roomLength()
         .organizationId()
         .defaultTableObjectTemplateId()
+        .isPublicRegistrationEnabled()
+        .publicRegistrationKey()
         .tables( (table) => (
             table
                 .id()
@@ -40,6 +42,17 @@ export const eventDetailFields = (
                 .x()
                 .y()
         ))
+        .customFields( customField => (
+            customField
+                .id()
+                .orderby()
+                .scope()
+                .name()
+                .type()
+                .prompt()
+                .placeholder()
+                .isRequired()
+        ))
         .parties( (party) => (
             party
                 .id()
@@ -67,6 +80,8 @@ export type Table = EventDetails['tables'][number]
 export type EventTag = EventDetails['tags'][number]
 
 export type Fixture = EventDetails['fixtures'][number]
+
+export type CustomField = EventDetails['customFields'][number]
 
 export type PlacedTable = Table & {
     color: string

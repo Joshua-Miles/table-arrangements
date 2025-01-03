@@ -1,12 +1,12 @@
 import { Box, BoxProps, Button, Card, Center, Flex, Input, Text, useEditable, VStack } from "@chakra-ui/react";
 import { useState } from "react";
-import { Party } from '../../fields'
+import { Party } from '../../../_shared/fields'
 import { AddIcon } from "@chakra-ui/icons";
 import { PartyModal } from "../PartyModal";
 import { randomColor } from "./randomColor";
 import { DraggablePartyCard } from "../DraggablePartCard";
 import { useDroppable } from "@dnd-kit/core";
-import { useEventEditor } from "../../EventEditor";
+import { useEventEditor } from "../../../_shared/EventEditor";
 
 type PartyListProps = BoxProps & {
     eventId: number

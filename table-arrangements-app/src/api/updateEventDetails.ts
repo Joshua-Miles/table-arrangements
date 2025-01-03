@@ -31,6 +31,16 @@ export function updateEventDetails(this: AmbassadorClient | void, eventId: numbe
         y?: undefined | number;
         shape?: undefined | "round" | "rectangle";
     })[];
+    customFields?: undefined | (undefined | {
+        type?: undefined | "text" | "email" | "phone";
+        id?: undefined | number;
+        name?: undefined | string;
+        prompt?: undefined | string;
+        scope?: undefined | "party" | "attendee";
+        orderby?: undefined | number;
+        placeholder?: undefined | string;
+        isRequired?: undefined | boolean;
+    })[];
     parties?: undefined | (undefined | {
         attendees?: undefined | (undefined | {
             id?: undefined | number;
@@ -49,6 +59,8 @@ export function updateEventDetails(this: AmbassadorClient | void, eventId: numbe
     roomWidth?: undefined | null | number;
     roomLength?: undefined | null | number;
     defaultTableObjectTemplateId?: undefined | null | number;
+    isPublicRegistrationEnabled?: undefined | boolean;
+    publicRegistrationKey?: undefined | string;
 }): Promise<{
     isFailure: true;
     code: "userUnauthorized";
@@ -92,6 +104,18 @@ export function updateEventDetails(this: AmbassadorClient | void, eventId: numbe
         y: number;
         shape: "round" | "rectangle";
     }[];
+    customFields: {
+        type: "text" | "email" | "phone";
+        id: number & {
+            __serial__?: undefined | true;
+        };
+        name: string;
+        prompt: string;
+        scope: "party" | "attendee";
+        orderby: number;
+        placeholder: string;
+        isRequired: boolean;
+    }[];
     parties: {
         attendees: {
             id: number & {
@@ -116,6 +140,8 @@ export function updateEventDetails(this: AmbassadorClient | void, eventId: numbe
     roomWidth: null | number;
     roomLength: null | number;
     defaultTableObjectTemplateId: null | number;
+    isPublicRegistrationEnabled: boolean;
+    publicRegistrationKey: string;
 }> {
     let api = AmbassadorClient.get(this, process.env.API_URL as string);
     return api.callRemoteFunction("updateEventDetails", eventId, fields);

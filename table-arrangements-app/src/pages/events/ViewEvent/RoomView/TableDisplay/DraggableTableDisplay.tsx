@@ -1,5 +1,5 @@
 import { useDraggable } from "@dnd-kit/core";
-import { useEventEditor } from "../../EventEditor";
+import { useEventEditor } from "../../../_shared/EventEditor";
 import { TableDisplay, TableDisplayProps } from "./TableDisplay";
 
 export function DraggableTableDisplay(props: TableDisplayProps) {
